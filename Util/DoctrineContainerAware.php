@@ -3,12 +3,12 @@
 namespace Cekurte\ComponentBundle\Util;
 
 /**
- * DoctrineAware
+ * DoctrineContainerAware
  *
  * @author João Paulo Cercal <sistemas@cekurte.com>
  * @version 1.0
  */
-class DoctrineAware extends ContainerAware
+class DoctrineContainerAware extends ContainerAware
 {
     /**
      * Shortcut to return the Doctrine Registry service.

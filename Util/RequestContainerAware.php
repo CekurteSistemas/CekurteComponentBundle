@@ -3,12 +3,12 @@
 namespace Cekurte\ComponentBundle\Util;
 
 /**
- * RequestAware
+ * RequestContainerAware
  *
  * @author João Paulo Cercal <sistemas@cekurte.com>
  * @version 1.0
  */
-class RequestAware extends SessionAware
+class RequestContainerAware extends SessionContainerAware
 {
     /**
      * Shortcut to return the Request instance.

@@ -3,12 +3,12 @@
 namespace Cekurte\ComponentBundle\Util;
 
 /**
- * SessionAware
+ * SessionContainerAware
  *
  * @author João Paulo Cercal <sistemas@cekurte.com>
  * @version 1.0
  */
-class SessionAware extends DoctrineAware
+class SessionContainerAware extends DoctrineContainerAware
 {
     /**
      * Shortcut to return the Session instance.
