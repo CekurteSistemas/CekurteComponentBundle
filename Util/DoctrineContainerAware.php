@@ -39,6 +39,8 @@ class DoctrineContainerAware extends ContainerAware
     /**
      * Get a instance of Entity Repository
      *
+     * @param string $name
+     *
      * @return mixed
      */
     public function getRepository($name)
