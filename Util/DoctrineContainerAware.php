@@ -2,13 +2,15 @@
 
 namespace Cekurte\ComponentBundle\Util;
 
+use Cekurte\ComponentBundle\Entity\RepositoryInterface;
+
 /**
  * DoctrineContainerAware
  *
  * @author João Paulo Cercal <sistemas@cekurte.com>
  * @version 1.0
  */
-class DoctrineContainerAware extends ContainerAware
+class DoctrineContainerAware extends ContainerAware implements RepositoryInterface
 {
     /**
      * Shortcut to return the Doctrine Registry service.
@@ -29,22 +31,20 @@ class DoctrineContainerAware extends ContainerAware
     /**
      * Get a instance of Entity Manager
      *
+     * @param string|null $name
+     *
      * @return \Doctrine\ORM\EntityManager
      */
-    public function getManager()
+    public function getManager($name = null)
     {
-        return $this->getDoctrine()->getManager();
+        return $this->getDoctrine()->getManager($name);
     }
 
     /**
-     * Get a instance of Entity Repository
-     *
-     * @param string $name
-     *
-     * @return mixed
+     * @inheritdoc
      */
-    public function getRepository($name)
+    public function getEntityRepository($persistentObjectName, $persistentManagerName = null)
     {
-        return $this->getManager()->getRepository($name);
+        return $this->getDoctrine()->getRepository($persistentObjectName, $persistentManagerName);
     }
 }
