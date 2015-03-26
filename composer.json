@@ -1,22 +1,23 @@
 {
     "name": "cekurte/componentbundle",
-    "description": "Component bundle",
-    "keywords": ["component"],
+    "description": "A set of components",
+    "keywords": ["controller","component","container","interface"],
+    "homepage": "https://github.com/jpcercal/cekurtecomponentbundle",
     "type": "symfony-bundle",
+    "license": "MIT",
     "authors": [
         {
             "name": "João Paulo Cercal",
-            "email": "sistemas@cekurte.com",
+            "email": "jpcercal@gmail.com",
             "homepage": "http://sistemas.cekurte.com/"
         }
     ],
     "autoload": {
-        "psr-0": { "Cekurte\\ComponentBundle": "" }
+        "psr-4": {"Cekurte\\ComponentBundle\\": ""}
     },
-    "target-dir": "Cekurte/ComponentBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0.x-dev"
+            "dev-master": "2.0.x-dev"
         }
     }
 }
