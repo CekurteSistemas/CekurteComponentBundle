@@ -12,13 +12,13 @@
 namespace Cekurte\ComponentBundle\DependencyInjection\ContainerAware;
 
 /**
- * ContainerAware
+ * User ContainerAware Trait
  * 
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
  * @version 2.0
  */
-class ContainerAware
+trait UserContainerAwareTrait
 {
 
 }

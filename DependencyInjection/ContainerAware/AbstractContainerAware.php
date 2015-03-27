@@ -9,16 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Cekurte\ComponentBundle\DependencyInjection\ContainerAware\Traits;
+namespace Cekurte\ComponentBundle\DependencyInjection\ContainerAware;
 
 /**
- * User ContainerAware
+ * ContainerAware
  * 
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
  * @version 2.0
+ *
+ * @abstract
  */
-trait UserContainerAware
+class AbstractContainerAware
 {
 
 }
