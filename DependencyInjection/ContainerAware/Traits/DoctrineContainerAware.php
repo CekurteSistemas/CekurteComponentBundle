@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Cekurte\ComponentBundle;
-
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+namespace Cekurte\ComponentBundle\DependencyInjection\ContainerAware\Traits;
 
 /**
- * CekurteComponentBundle
- *
+ * Doctrine ContainerAware
+ * 
  * @author João Paulo Cercal <jpcercal@gmail.com>
+ *
+ * @version 2.0
  */
-class CekurteComponentBundle extends Bundle
+trait DoctrineContainerAware
 {
 
 }

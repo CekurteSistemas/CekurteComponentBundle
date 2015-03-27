@@ -12,6 +12,9 @@
             "homepage": "http://sistemas.cekurte.com/"
         }
     ],
+    "require": {
+        "symfony/framework-bundle": "~2.3"
+    },
     "autoload": {
         "psr-4": {"Cekurte\\ComponentBundle\\": ""}
     },
@@ -21,3 +24,5 @@
         }
     }
 }
+
+

@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Cekurte\ComponentBundle;
-
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+namespace Cekurte\ComponentBundle\Service\Http\Rest;
 
 /**
- * CekurteComponentBundle
- *
+ * Service Manager Interface
+ * 
  * @author João Paulo Cercal <jpcercal@gmail.com>
+ *
+ * @version 2.0
  */
-class CekurteComponentBundle extends Bundle
+interface ServiceManagerInterface
 {
-
+    
 }
