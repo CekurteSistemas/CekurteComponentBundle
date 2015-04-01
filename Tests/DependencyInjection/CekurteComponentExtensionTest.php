@@ -28,15 +28,6 @@ class CekurteComponentExtensionTest extends \PHPUnit_Framework_TestCase
      */
     protected $configuration;
 
-    public function setUp()
-    {
-        $this->configuration = new ContainerBuilder();
-
-        $loader = new CekurteComponentExtension();
-
-        $loader->load(array(), $this->configuration);
-    }
-
     /**
      * Assert parameter
      *
@@ -48,11 +39,67 @@ class CekurteComponentExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($value, $this->configuration->getParameter($key), sprintf('%s parameter is correct', $key));
     }
 
-    public function testLoadHasParameterControllerHttpRestControllerClass()
+    /**
+     * Assert has definition
+     *
+     * @param string $id
+     */
+    private function assertHasDefinition($id)
+    {
+        $this->assertTrue(($this->configuration->hasDefinition($id) ?: $this->configuration->hasAlias($id)));
+    }
+
+    public function setUp()
+    {
+        $this->configuration = new ContainerBuilder();
+
+        $loader = new CekurteComponentExtension();
+
+        $loader->load(array(), $this->configuration);
+    }
+
+    public function testLoadHasParameterControllerHttpRestClass()
     {
         $this->assertParameter(
             'Cekurte\ComponentBundle\Controller\Http\Rest\Controller',
             'cekurte_component.controller.http.rest.class'
+        );
+    }
+
+    public function testLoadHasParameterSerializerHttpRestClass()
+    {
+        $this->assertParameter(
+            'Cekurte\ComponentBundle\Serializer\Http\Rest\Serializer',
+            'cekurte_component.serializer.http.rest.class'
+        );
+    }
+
+    public function testLoadHasParameterServiceHttpRestClass()
+    {
+        $this->assertParameter(
+            'Cekurte\ComponentBundle\Service\Http\Rest\ServiceManager',
+            'cekurte_component.service.http.rest.class'
+        );
+    }
+
+    public function testLoadHasDefinitionControllerHttpRest()
+    {
+        $this->assertHasDefinition(
+            'cekurte_component.controller.http.rest'
+        );
+    }
+
+    public function testLoadHasDefinitionSerializerHttpRest()
+    {
+        $this->assertHasDefinition(
+            'cekurte_component.serializer.http.rest'
+        );
+    }
+
+    public function testLoadHasDefinitionServiceHttpRest()
+    {
+        $this->assertHasDefinition(
+            'cekurte_component.service.http.rest'
         );
     }
 }
