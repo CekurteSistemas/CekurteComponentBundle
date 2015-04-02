@@ -92,24 +92,6 @@ class DoctrineResourceManagerTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($mockEntityRepository))
         ;
 
-        $entityManager
-            ->expects($this->any())
-            ->method('persist')
-            ->will($this->returnValue(null))
-        ;
-
-        $entityManager
-            ->expects($this->any())
-            ->method('remove')
-            ->will($this->returnValue(null))
-        ;
-
-        $entityManager
-            ->expects($this->any())
-            ->method('flush')
-            ->will($this->returnValue(null))
-        ;
-
         return $entityManager;
     }
 
@@ -163,7 +145,14 @@ class DoctrineResourceManagerTest extends \PHPUnit_Framework_TestCase
 
         $mockContainer     = $this->getMockContainer($mockEntityManager);
 
-        $doctrineResourceManager = new DoctrineResourceManager($mockContainer, $this->getFakeEntityName());
+        $doctrineResourceManager = $this
+            ->getMockBuilder('\\Cekurte\\ComponentBundle\\Service\\ResourceManager\\DoctrineResourceManager')
+            ->setConstructorArgs(array(
+                $mockContainer,
+                $this->getFakeEntityName()
+            ))
+            ->getMockForAbstractClass()
+        ;
 
         $this->assertEquals($this->getFakeEntityName(), $doctrineResourceManager->getResourceClassName());
     }
@@ -184,7 +173,14 @@ class DoctrineResourceManagerTest extends \PHPUnit_Framework_TestCase
 
         $mockContainer     = $this->getMockContainer($mockEntityManager);
 
-        $doctrineResourceManager = new DoctrineResourceManager($mockContainer, $this->getFakeEntityName());
+        $doctrineResourceManager = $this
+            ->getMockBuilder('\\Cekurte\\ComponentBundle\\Service\\ResourceManager\\DoctrineResourceManager')
+            ->setConstructorArgs(array(
+                $mockContainer,
+                $this->getFakeEntityName()
+            ))
+            ->getMockForAbstractClass()
+        ;
 
         $resource = $doctrineResourceManager->findResource(array());
 
@@ -219,7 +215,14 @@ class DoctrineResourceManagerTest extends \PHPUnit_Framework_TestCase
 
         $mockContainer     = $this->getMockContainer($mockEntityManager);
 
-        $doctrineResourceManager = new DoctrineResourceManager($mockContainer, $this->getFakeEntityName());
+        $doctrineResourceManager = $this
+            ->getMockBuilder('\\Cekurte\\ComponentBundle\\Service\\ResourceManager\\DoctrineResourceManager')
+            ->setConstructorArgs(array(
+                $mockContainer,
+                $this->getFakeEntityName()
+            ))
+            ->getMockForAbstractClass()
+        ;
 
         $resource = $doctrineResourceManager->findResource(array());
 
@@ -244,7 +247,14 @@ class DoctrineResourceManagerTest extends \PHPUnit_Framework_TestCase
 
         $mockContainer     = $this->getMockContainer($mockEntityManager);
 
-        $doctrineResourceManager = new DoctrineResourceManager($mockContainer, $this->getFakeEntityName());
+        $doctrineResourceManager = $this
+            ->getMockBuilder('\\Cekurte\\ComponentBundle\\Service\\ResourceManager\\DoctrineResourceManager')
+            ->setConstructorArgs(array(
+                $mockContainer,
+                $this->getFakeEntityName()
+            ))
+            ->getMockForAbstractClass()
+        ;
 
         $resources = $doctrineResourceManager->findResources();
 
@@ -262,7 +272,14 @@ class DoctrineResourceManagerTest extends \PHPUnit_Framework_TestCase
 
         $mockContainer     = $this->getMockContainer($mockEntityManager);
 
-        $doctrineResourceManager = new DoctrineResourceManager($mockContainer, $this->getFakeEntityName());
+        $doctrineResourceManager = $this
+            ->getMockBuilder('\\Cekurte\\ComponentBundle\\Service\\ResourceManager\\DoctrineResourceManager')
+            ->setConstructorArgs(array(
+                $mockContainer,
+                $this->getFakeEntityName()
+            ))
+            ->getMockForAbstractClass()
+        ;
 
         $result = $doctrineResourceManager->writeResource($mockEntity);
 
@@ -277,7 +294,14 @@ class DoctrineResourceManagerTest extends \PHPUnit_Framework_TestCase
 
         $mockContainer     = $this->getMockContainer($mockEntityManager);
 
-        $doctrineResourceManager = new DoctrineResourceManager($mockContainer, $this->getFakeEntityName());
+        $doctrineResourceManager = $this
+            ->getMockBuilder('\\Cekurte\\ComponentBundle\\Service\\ResourceManager\\DoctrineResourceManager')
+            ->setConstructorArgs(array(
+                $mockContainer,
+                $this->getFakeEntityName()
+            ))
+            ->getMockForAbstractClass()
+        ;
 
         $result = $doctrineResourceManager->updateResource($mockEntity);
 
@@ -292,7 +316,14 @@ class DoctrineResourceManagerTest extends \PHPUnit_Framework_TestCase
 
         $mockContainer     = $this->getMockContainer($mockEntityManager);
 
-        $doctrineResourceManager = new DoctrineResourceManager($mockContainer, $this->getFakeEntityName());
+        $doctrineResourceManager = $this
+            ->getMockBuilder('\\Cekurte\\ComponentBundle\\Service\\ResourceManager\\DoctrineResourceManager')
+            ->setConstructorArgs(array(
+                $mockContainer,
+                $this->getFakeEntityName()
+            ))
+            ->getMockForAbstractClass()
+        ;
 
         $result = $doctrineResourceManager->deleteResource($mockEntity);
 

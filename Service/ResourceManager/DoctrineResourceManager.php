@@ -24,8 +24,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
  * @version 2.0
+ *
+ * @abstract
  */
-class DoctrineResourceManager extends AbstractContainerAware implements ResourceManagerInterface
+abstract class DoctrineResourceManager extends AbstractContainerAware implements ResourceManagerInterface
 {
     use DoctrineContainerAwareTrait;
 
