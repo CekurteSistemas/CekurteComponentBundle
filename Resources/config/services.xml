@@ -5,14 +5,19 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="cekurte_component.controller.http.rest.class">Cekurte\ComponentBundle\Controller\Http\Rest\Controller</parameter>
-        <parameter key="cekurte_component.serializer.http.rest.class">Cekurte\ComponentBundle\Serializer\Http\Rest\Serializer</parameter>
-        <parameter key="cekurte_component.service.http.rest.class">Cekurte\ComponentBundle\Service\Http\Rest\ServiceManager</parameter>
+        <parameter key="cekurte_component.controller.http.rest.class">Cekurte\ComponentBundle\Controller\Http\RestController</parameter>
+        <parameter key="cekurte_component.serializer.json.class">Cekurte\ComponentBundle\Serializer\JsonSerializer</parameter>
+        <parameter key="cekurte_component.service.resource_manager.doctrine.class">Cekurte\ComponentBundle\Service\ResourceManager\DoctrineResourceManager</parameter>
     </parameters>
 
     <services>
-        <service id="cekurte_component.controller.http.rest" class="%cekurte_component.controller.http.rest.class%"></service>
-        <service id="cekurte_component.serializer.http.rest" class="%cekurte_component.serializer.http.rest.class%"></service>
-        <service id="cekurte_component.service.http.rest" class="%cekurte_component.service.http.rest.class%"></service>
+        <service id="cekurte_component.controller.http.rest" class="%cekurte_component.controller.http.rest.class%">
+            <argument type="service" key="cekurte_component.serializer.json"></argument>
+            <argument type="service" key="cekurte_component.service.resource_manager.doctrine"></argument>
+        </service>
+        <service id="cekurte_component.serializer.json" class="%cekurte_component.serializer.json.class%"></service>
+        <service id="cekurte_component.service.resource_manager.doctrine" class="%cekurte_component.service.resource_manager.doctrine.class%">
+            <argument type="service" key="doctrine.orm.entity_manager"></argument>
+        </service>
     </services>
 </container>

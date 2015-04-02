@@ -113,8 +113,6 @@ class DoctrineResourceManager implements ResourceManagerInterface
                 implode(', ', array_values($parameters))
             ));
         }
-        var_dump($resource);
-        exit;
 
         return $resource;
     }

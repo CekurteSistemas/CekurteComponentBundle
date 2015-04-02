@@ -10,6 +10,7 @@
  */
 
 namespace Cekurte\ComponentBundle\Tests\Service\ServiceManager;
+
 use Cekurte\ComponentBundle\Service\ResourceManager\DoctrineResourceManager;
 
 /**
@@ -26,7 +27,8 @@ class DoctrineResourceManagerTest extends \PHPUnit_Framework_TestCase
         $entityManager = $this
             ->getMockBuilder('\Doctrine\ORM\EntityManagerInterface')
             ->disableOriginalConstructor()
-            ->getMock();
+            ->getMock()
+        ;
 
         $fakeEntity = 'CekurteComponentBundle\\FakeEntity';
 
@@ -39,37 +41,53 @@ class DoctrineResourceManagerTest extends \PHPUnit_Framework_TestCase
     {
         $fakeEntity = 'CekurteComponentBundle\\FakeEntity';
 
-        $entity = $this->getMock($fakeEntity);
+        $entity = $this
+            ->getMockBuilder($fakeEntity)
+            ->setMethods(array('getNumber', 'getName'))
+            ->getMock()
+        ;
 
-        $entity->expects($this->once())
+        $entity
+            ->expects($this->once())
             ->method('getNumber')
-            ->will($this->returnValue(1000));
+            ->will($this->returnValue(1000))
+        ;
 
-//        $entityRepository = $this
-//            ->getMockBuilder('\Doctrine\ORM\EntityRepository')
-//            ->disableOriginalConstructor()
-//            ->getMock();
-//
-//        $entityRepository->expects($this->once())
-//            ->method('findOneBy')
-//            ->will($this->returnValue(array(
-//                'number' => $entity->getNumber()
-//            )));
-//
-//        $entityManager = $this
-//            ->getMockBuilder('\Doctrine\ORM\EntityManagerInterface')
-//            ->disableOriginalConstructor()
-//            ->getMock();
-//
-//        $entityManager->expects($this->once())
-//            ->method('getRepository')
-//            ->will($this->returnValue($entityRepository));
-//
-//        $doctrineResourceManager = new DoctrineResourceManager($entityManager, $fakeEntity);
-//
-//        $resource = $doctrineResourceManager->getResource(array());
+        $entity
+            ->expects($this->once())
+            ->method('getName')
+            ->will($this->returnValue('Cercal'))
+        ;
 
-        $this->assertEquals(1000, $entity->getNumber());
+        $entityRepository = $this
+            ->getMockBuilder('\Doctrine\ORM\EntityRepository')
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
 
+        $entityRepository
+            ->expects($this->once())
+            ->method('findOneBy')
+            ->will($this->returnValue($entity))
+        ;
+
+        $entityManager = $this
+            ->getMockBuilder('\Doctrine\ORM\EntityManagerInterface')
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+
+        $entityManager
+            ->expects($this->once())
+            ->method('getRepository')
+            ->will($this->returnValue($entityRepository))
+        ;
+
+        $doctrineResourceManager = new DoctrineResourceManager($entityManager, $fakeEntity);
+
+        $resource = $doctrineResourceManager->getResource(array());
+
+        $this->assertEquals(1000,     $resource->getNumber());
+        $this->assertEquals('Cercal', $resource->getName());
     }
 }

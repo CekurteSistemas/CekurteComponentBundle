@@ -58,48 +58,80 @@ class CekurteComponentExtensionTest extends \PHPUnit_Framework_TestCase
         $loader->load(array(), $this->configuration);
     }
 
-    public function testLoadHasParameterControllerHttpRestClass()
+    public function testLoadParameterControllerHttpRestClass()
     {
+        $this->assertTrue(class_exists('\\Cekurte\\ComponentBundle\\Controller\\Http\\RestController'));
+
         $this->assertParameter(
-            'Cekurte\ComponentBundle\Controller\Http\Rest\Controller',
+            'Cekurte\ComponentBundle\Controller\Http\RestController',
             'cekurte_component.controller.http.rest.class'
         );
     }
 
-    public function testLoadHasParameterSerializerHttpRestClass()
+    public function testLoadParameterJsonSerializerClass()
     {
+        $this->assertTrue(class_exists('\\Cekurte\\ComponentBundle\\Serializer\\JsonSerializer'));
+
         $this->assertParameter(
-            'Cekurte\ComponentBundle\Serializer\Http\Rest\Serializer',
-            'cekurte_component.serializer.http.rest.class'
+            'Cekurte\ComponentBundle\Serializer\JsonSerializer',
+            'cekurte_component.serializer.json.class'
         );
     }
 
-    public function testLoadHasParameterServiceHttpRestClass()
+    public function testLoadParameterServiceDoctrineResourceManagerClass()
     {
+        $this->assertTrue(class_exists('\\Cekurte\\ComponentBundle\\Service\\ResourceManager\\DoctrineResourceManager'));
+
         $this->assertParameter(
-            'Cekurte\ComponentBundle\Service\Http\Rest\ServiceManager',
-            'cekurte_component.service.http.rest.class'
+            'Cekurte\ComponentBundle\Service\ResourceManager\DoctrineResourceManager',
+            'cekurte_component.service.resource_manager.doctrine.class'
         );
     }
 
-    public function testLoadHasDefinitionControllerHttpRest()
+    public function testLoadHasDefinitionControllerHttpRestClass()
     {
         $this->assertHasDefinition(
             'cekurte_component.controller.http.rest'
         );
     }
 
-    public function testLoadHasDefinitionSerializerHttpRest()
+    public function testLoadHasDefinitionJsonSerializerClass()
     {
         $this->assertHasDefinition(
-            'cekurte_component.serializer.http.rest'
+            'cekurte_component.serializer.json'
         );
     }
 
-    public function testLoadHasDefinitionServiceHttpRest()
+    public function testLoadHasDefinitionServiceDoctrineResourceManagerClass()
     {
         $this->assertHasDefinition(
-            'cekurte_component.service.http.rest'
+            'cekurte_component.service.resource_manager.doctrine'
         );
+    }
+
+    public function testLoadDefinitionControllerHttpRestClass()
+    {
+        $definition = $this->configuration->getDefinition('cekurte_component.controller.http.rest');
+
+        $this->assertEquals('%cekurte_component.controller.http.rest.class%', $definition->getClass());
+
+        $this->assertArrayHasKey('cekurte_component.serializer.json', $definition->getArguments());
+        $this->assertArrayHasKey('cekurte_component.service.resource_manager.doctrine', $definition->getArguments());
+    }
+
+    public function testLoadDefinitionJsonSerializerClass()
+    {
+        $definition = $this->configuration->getDefinition('cekurte_component.serializer.json');
+
+        $this->assertEquals('%cekurte_component.serializer.json.class%', $definition->getClass());
+    }
+
+    public function testLoadDefinitionServiceDoctrineResourceManagerClass()
+    {
+        $definition = $this->configuration->getDefinition('cekurte_component.service.resource_manager.doctrine');
+
+        $this->assertEquals('%cekurte_component.service.resource_manager.doctrine.class%', $definition->getClass());
+
+        $this->assertArrayHasKey('doctrine.orm.entity_manager', $definition->getArguments());
     }
 }

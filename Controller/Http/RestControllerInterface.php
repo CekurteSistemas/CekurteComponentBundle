@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Cekurte\ComponentBundle\Controller\Http\Rest;
+namespace Cekurte\ComponentBundle\Controller\Http;
 
 /**
- * Controller Interface
+ * RestController Interface
  * 
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
  * @version 2.0
  */
-interface ControllerInterface
+interface RestControllerInterface
 {
 
 }

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Cekurte\ComponentBundle\Serializer\Http\Rest;
+namespace Cekurte\ComponentBundle\Serializer;
 
 use Cekurte\ComponentBundle\Serializer\SerializerInterface;
 use Cekurte\ComponentBundle\Service\ServiceManager\ResourceInterface;
