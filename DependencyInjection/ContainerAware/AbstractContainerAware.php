@@ -11,8 +11,11 @@
 
 namespace Cekurte\ComponentBundle\DependencyInjection\ContainerAware;
 
+use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 /**
- * ContainerAware
+ * AbstractContainerAware
  * 
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
@@ -20,7 +23,15 @@ namespace Cekurte\ComponentBundle\DependencyInjection\ContainerAware;
  *
  * @abstract
  */
-class AbstractContainerAware
+class AbstractContainerAware extends ContainerAware
 {
-
+    /**
+     * Get a instance of ContainerInterface.
+     *
+     * @return ContainerInterface
+     */
+    public function getContainer()
+    {
+        return $this->container;
+    }
 }

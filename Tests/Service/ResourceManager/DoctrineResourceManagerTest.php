@@ -22,72 +22,280 @@ use Cekurte\ComponentBundle\Service\ResourceManager\DoctrineResourceManager;
  */
 class DoctrineResourceManagerTest extends \PHPUnit_Framework_TestCase
 {
-    public function testGetResourceClassName()
+    /**
+     * @return string
+     */
+    private function getFakeEntityName()
     {
-        $entityManager = $this
-            ->getMockBuilder('\Doctrine\ORM\EntityManagerInterface')
-            ->disableOriginalConstructor()
-            ->getMock()
-        ;
-
-        $fakeEntity = 'CekurteComponentBundle\\FakeEntity';
-
-        $doctrineResourceManager = new DoctrineResourceManager($entityManager, $fakeEntity);
-
-        $this->assertEquals($fakeEntity, $doctrineResourceManager->getResourceClassName());
+        return '\\Cekurte\\ComponentBundle\\Service\\ResourceManager\\ResourceInterface';
     }
 
-    public function testGetResource()
+    /**
+     * @param  string $entityName
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    private function getMockEntity($entityName = '')
     {
-        $fakeEntity = 'CekurteComponentBundle\\FakeEntity';
-
         $entity = $this
-            ->getMockBuilder($fakeEntity)
+            ->getMockBuilder($this->getFakeEntityName())
             ->setMethods(array('getNumber', 'getName'))
             ->getMock()
         ;
 
         $entity
-            ->expects($this->once())
+            ->expects($this->any())
             ->method('getNumber')
             ->will($this->returnValue(1000))
         ;
 
         $entity
-            ->expects($this->once())
+            ->expects($this->any())
             ->method('getName')
             ->will($this->returnValue('Cercal'))
         ;
 
-        $entityRepository = $this
-            ->getMockBuilder('\Doctrine\ORM\EntityRepository')
+        return $entity;
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    private function getMockEntityRepository()
+    {
+        $mockBuilder = $this
+            ->getMockBuilder('\\Doctrine\\Common\\Persistence\\ObjectRepository')
+            ->setMethods(array('find', 'findAll', 'findBy', 'findOneBy', 'getClassName', 'getLogEntries'))
             ->disableOriginalConstructor()
             ->getMock()
         ;
 
-        $entityRepository
-            ->expects($this->once())
-            ->method('findOneBy')
-            ->will($this->returnValue($entity))
-        ;
+        return $mockBuilder;
+    }
 
+    /**
+     * @param  \PHPUnit_Framework_MockObject_MockObject|null $mockEntityRepository
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    private function getMockEntityManager(\PHPUnit_Framework_MockObject_MockObject $mockEntityRepository = null)
+    {
         $entityManager = $this
-            ->getMockBuilder('\Doctrine\ORM\EntityManagerInterface')
+            ->getMockBuilder('\\Doctrine\\ORM\\EntityManagerInterface')
             ->disableOriginalConstructor()
             ->getMock()
         ;
 
         $entityManager
-            ->expects($this->once())
+            ->expects($this->any())
             ->method('getRepository')
-            ->will($this->returnValue($entityRepository))
+            ->will($this->returnValue($mockEntityRepository))
         ;
 
-        $doctrineResourceManager = new DoctrineResourceManager($entityManager, $fakeEntity);
+        $entityManager
+            ->expects($this->any())
+            ->method('persist')
+            ->will($this->returnValue(null))
+        ;
 
-        $resource = $doctrineResourceManager->getResource(array());
+        $entityManager
+            ->expects($this->any())
+            ->method('remove')
+            ->will($this->returnValue(null))
+        ;
+
+        $entityManager
+            ->expects($this->any())
+            ->method('flush')
+            ->will($this->returnValue(null))
+        ;
+
+        return $entityManager;
+    }
+
+    /**
+     * @param  \PHPUnit_Framework_MockObject_MockObject $mockEntityManager
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    private function getMockContainer(\PHPUnit_Framework_MockObject_MockObject $mockEntityManager)
+    {
+        $container = $this
+            ->getMockBuilder('\\Symfony\\Component\\DependencyInjection\\Container')
+            ->setMethods(array('has', 'get', 'setContainer'))
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+
+        $container
+            ->expects($this->any())
+            ->method('has')
+            ->withAnyParameters()
+            ->will($this->returnValue(true))
+        ;
+
+        $doctrine = $this
+            ->getMockBuilder('\\Doctrine\\Bundle\\DoctrineBundle\\Registry')
+            ->setMethods(array('getManager'))
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+
+        $doctrine
+            ->expects($this->any())
+            ->method('getManager')
+            ->will($this->returnValue($mockEntityManager))
+        ;
+
+        $container
+            ->expects($this->any())
+            ->method('get')
+            ->with($this->equalTo('doctrine'))
+            ->will($this->returnValue($doctrine))
+        ;
+
+        return $container;
+    }
+
+    public function testGetResourceClassName()
+    {
+        $mockEntityManager = $this->getMockEntityManager();
+
+        $mockContainer     = $this->getMockContainer($mockEntityManager);
+
+        $doctrineResourceManager = new DoctrineResourceManager($mockContainer, $this->getFakeEntityName());
+
+        $this->assertEquals($this->getFakeEntityName(), $doctrineResourceManager->getResourceClassName());
+    }
+
+    public function testFindResource()
+    {
+        $mockEntity           = $this->getMockEntity();
+
+        $mockEntityRepository = $this->getMockEntityRepository();
+
+        $mockEntityRepository
+            ->expects($this->once())
+            ->method('findOneBy')
+            ->will($this->returnValue($mockEntity))
+        ;
+
+        $mockEntityManager = $this->getMockEntityManager($mockEntityRepository);
+
+        $mockContainer     = $this->getMockContainer($mockEntityManager);
+
+        $doctrineResourceManager = new DoctrineResourceManager($mockContainer, $this->getFakeEntityName());
+
+        $resource = $doctrineResourceManager->findResource(array());
+
+        $this->assertInstanceOf(
+            '\\Cekurte\\ComponentBundle\\Service\\ResourceManager\\ResourceInterface',
+            $resource
+        );
 
         $this->assertEquals(1000,     $resource->getNumber());
         $this->assertEquals('Cercal', $resource->getName());
+    }
+
+    public function testGetLogEntriesAsEmpty()
+    {
+        $mockEntity           = $this->getMockEntity();
+
+        $mockEntityRepository = $this->getMockEntityRepository();
+
+        $mockEntityRepository
+            ->expects($this->once())
+            ->method('findOneBy')
+            ->will($this->returnValue($mockEntity))
+        ;
+
+        $mockEntityRepository
+            ->expects($this->once())
+            ->method('getLogEntries')
+            ->will($this->returnValue(array()))
+        ;
+
+        $mockEntityManager = $this->getMockEntityManager($mockEntityRepository);
+
+        $mockContainer     = $this->getMockContainer($mockEntityManager);
+
+        $doctrineResourceManager = new DoctrineResourceManager($mockContainer, $this->getFakeEntityName());
+
+        $resource = $doctrineResourceManager->findResource(array());
+
+        $entries = $doctrineResourceManager->getLogEntries($resource);
+
+        $this->assertEmpty($entries);
+    }
+
+    public function testFindResources()
+    {
+        $mockEntity           = $this->getMockEntity();
+
+        $mockEntityRepository = $this->getMockEntityRepository();
+
+        $mockEntityRepository
+            ->expects($this->once())
+            ->method('findBy')
+            ->will($this->returnValue(array($mockEntity, $mockEntity, $mockEntity)))
+        ;
+
+        $mockEntityManager = $this->getMockEntityManager($mockEntityRepository);
+
+        $mockContainer     = $this->getMockContainer($mockEntityManager);
+
+        $doctrineResourceManager = new DoctrineResourceManager($mockContainer, $this->getFakeEntityName());
+
+        $resources = $doctrineResourceManager->findResources();
+
+        $this->assertEquals(1000,     $resources[0]->getNumber());
+        $this->assertEquals('Cercal', $resources[0]->getName());
+
+        $this->assertEquals(3, count($resources));
+    }
+
+    public function testWriteResource()
+    {
+        $mockEntity        = $this->getMockEntity();
+
+        $mockEntityManager = $this->getMockEntityManager();
+
+        $mockContainer     = $this->getMockContainer($mockEntityManager);
+
+        $doctrineResourceManager = new DoctrineResourceManager($mockContainer, $this->getFakeEntityName());
+
+        $result = $doctrineResourceManager->writeResource($mockEntity);
+
+        $this->assertTrue($result);
+    }
+
+    public function testUpdateResource()
+    {
+        $mockEntity        = $this->getMockEntity();
+
+        $mockEntityManager = $this->getMockEntityManager();
+
+        $mockContainer     = $this->getMockContainer($mockEntityManager);
+
+        $doctrineResourceManager = new DoctrineResourceManager($mockContainer, $this->getFakeEntityName());
+
+        $result = $doctrineResourceManager->updateResource($mockEntity);
+
+        $this->assertTrue($result);
+    }
+
+    public function testDeleteResource()
+    {
+        $mockEntity        = $this->getMockEntity();
+
+        $mockEntityManager = $this->getMockEntityManager();
+
+        $mockContainer     = $this->getMockContainer($mockEntityManager);
+
+        $doctrineResourceManager = new DoctrineResourceManager($mockContainer, $this->getFakeEntityName());
+
+        $result = $doctrineResourceManager->deleteResource($mockEntity);
+
+        $this->assertTrue($result);
     }
 }

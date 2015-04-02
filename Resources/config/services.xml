@@ -11,13 +11,6 @@
     </parameters>
 
     <services>
-        <service id="cekurte_component.controller.http.rest" class="%cekurte_component.controller.http.rest.class%">
-            <argument type="service" key="cekurte_component.serializer.json"></argument>
-            <argument type="service" key="cekurte_component.service.resource_manager.doctrine"></argument>
-        </service>
         <service id="cekurte_component.serializer.json" class="%cekurte_component.serializer.json.class%"></service>
-        <service id="cekurte_component.service.resource_manager.doctrine" class="%cekurte_component.service.resource_manager.doctrine.class%">
-            <argument type="service" key="doctrine.orm.entity_manager"></argument>
-        </service>
     </services>
 </container>

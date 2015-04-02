@@ -11,6 +11,9 @@
 
 namespace Cekurte\ComponentBundle\Controller\Http;
 
+use Cekurte\ComponentBundle\Serializer\SerializerInterface;
+use Cekurte\ComponentBundle\Service\ResourceManagerInterface;
+
 /**
  * RestController Interface
  * 
@@ -20,5 +23,17 @@ namespace Cekurte\ComponentBundle\Controller\Http;
  */
 interface RestControllerInterface
 {
+    /**
+     * Get a instance of Serializer
+     *
+     * @return SerializerInterface
+     */
+    public function getSerializer();
 
+    /**
+     * Get a instance of Resource Manager
+     *
+     * @return ResourceManagerInterface
+     */
+    public function getResourceManager();
 }

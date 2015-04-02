@@ -11,8 +11,6 @@
 
 namespace Cekurte\ComponentBundle\Service\ResourceManager;
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
 /**
  * ResourceDeletable Interface
  * 

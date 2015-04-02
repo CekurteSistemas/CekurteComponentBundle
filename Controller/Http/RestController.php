@@ -11,6 +11,10 @@
 
 namespace Cekurte\ComponentBundle\Controller\Http;
 
+use Cekurte\ComponentBundle\Serializer\SerializerInterface;
+use Cekurte\ComponentBundle\Service\ResourceManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 /**
  * RestController
  * 
@@ -18,7 +22,43 @@ namespace Cekurte\ComponentBundle\Controller\Http;
  *
  * @version 2.0
  */
-class RestController
+class RestController extends Controller implements RestControllerInterface
 {
+    /**
+     * @var SerializerInterface
+     */
+    protected $serializer;
 
+    /**
+     * @var ResourceManagerInterface
+     */
+    protected $resourceManager;
+
+    /**
+     * Init
+     *
+     * @param SerializerInterface      $serializer
+     * @param ResourceManagerInterface $resourceManager
+     */
+    public function __construct(SerializerInterface $serializer, ResourceManagerInterface $resourceManager)
+    {
+        $this->serializer      = $serializer;
+        $this->resourceManager = $resourceManager;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSerializer()
+    {
+        return $this->serializer;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getResourceManager()
+    {
+        return $this->resourceManager;
+    }
 }

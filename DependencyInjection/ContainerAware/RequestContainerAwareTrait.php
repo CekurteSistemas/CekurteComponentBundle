@@ -13,6 +13,8 @@ namespace Cekurte\ComponentBundle\DependencyInjection\ContainerAware;
 
 /**
  * Request ContainerAware Trait
+ *
+ * Use this trait with @see \Cekurte\ComponentBundle\DependencyInjection\ContainerAware\AbstractContainerAware
  * 
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
@@ -20,5 +22,19 @@ namespace Cekurte\ComponentBundle\DependencyInjection\ContainerAware;
  */
 trait RequestContainerAwareTrait
 {
+    /**
+     * Shortcut to return the Request instance.
+     *
+     * @return \Doctrine\Bundle\DoctrineBundle\Registry
+     *
+     * @throws \LogicException
+     */
+    public function getRequest()
+    {
+        if (!$this->getContainer()->has('request')) {
+            throw new \LogicException('The Request is not registered in your application.');
+        }
 
+        return $this->getContainer()->get('request');
+    }
 }

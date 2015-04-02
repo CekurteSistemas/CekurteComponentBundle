@@ -11,8 +11,6 @@
 
 namespace Cekurte\ComponentBundle\Service\ResourceManager;
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
 /**
  * ResourceLoggable Interface
  * 
@@ -23,15 +21,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 interface ResourceLoggableInterface extends ResourceInterface
 {
     /**
-     * Get a loggable resource given the resource.
+     * Get all logs entries given the resource.
      *
      * @api
      *
      * @param  ResourceInterface $resource
      *
-     * @return mixed
-     *
-     * @throws NotFoundHttpException
+     * @return array
      */
-    public function getLoggableResource(ResourceInterface $resource);
+    public function getLogEntries(ResourceInterface $resource);
 }

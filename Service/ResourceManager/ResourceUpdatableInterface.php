@@ -11,8 +11,6 @@
 
 namespace Cekurte\ComponentBundle\Service\ResourceManager;
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
 /**
  * ResourceUpdatable Interface
  * 
@@ -23,16 +21,15 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 interface ResourceUpdatableInterface extends ResourceInterface
 {
     /**
-     * Update the resource(s) given the parameters.
+     * Update a resource given the resource.
      *
      * @api
      *
      * @param  ResourceInterface $resource
-     * @param  array             $parameters
      *
      * @return bool
      *
      * @throws \Exception
      */
-    public function updateResource(ResourceInterface $resource, array $parameters);
+    public function updateResource(ResourceInterface $resource);
 }

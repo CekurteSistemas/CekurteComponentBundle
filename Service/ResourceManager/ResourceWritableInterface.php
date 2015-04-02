@@ -11,8 +11,6 @@
 
 namespace Cekurte\ComponentBundle\Service\ResourceManager;
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
 /**
  * ResourceWritable Interface
  * 
@@ -23,15 +21,15 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 interface ResourceWritableInterface extends ResourceInterface
 {
     /**
-     * Write a resource given the parameters.
+     * Write a resource given the resource.
      *
      * @api
      *
-     * @param  array $parameters
+     * @param  ResourceInterface $resource
      *
      * @return bool
      *
      * @throws \Exception
      */
-    public function writeResource(array $parameters);
+    public function writeResource(ResourceInterface $resource);
 }

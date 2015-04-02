@@ -11,7 +11,7 @@
 
 namespace Cekurte\ComponentBundle\Serializer;
 
-use Cekurte\ComponentBundle\Service\ServiceManager\ResourceInterface;
+use Cekurte\ComponentBundle\Service\ResourceManager\ResourceInterface;
 
 /**
  * Serializer Interface

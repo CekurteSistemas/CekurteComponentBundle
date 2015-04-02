@@ -14,7 +14,6 @@ namespace Cekurte\ComponentBundle\Service;
 use Cekurte\ComponentBundle\Service\ResourceManager\ResourceDeletableInterface;
 use Cekurte\ComponentBundle\Service\ResourceManager\ResourceInterface;
 use Cekurte\ComponentBundle\Service\ResourceManager\ResourceLoggableInterface;
-use Cekurte\ComponentBundle\Service\ResourceManager\ResourceReadableInterface;
 use Cekurte\ComponentBundle\Service\ResourceManager\ResourceSearchableInterface;
 use Cekurte\ComponentBundle\Service\ResourceManager\ResourceUpdatableInterface;
 use Cekurte\ComponentBundle\Service\ResourceManager\ResourceWritableInterface;
@@ -28,7 +27,6 @@ use Cekurte\ComponentBundle\Service\ResourceManager\ResourceWritableInterface;
  */
 interface ResourceManagerInterface extends
     ResourceInterface,
-    ResourceReadableInterface,
     ResourceLoggableInterface,
     ResourceSearchableInterface,
     ResourceWritableInterface,

@@ -15,6 +15,8 @@ use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Doctrine ContainerAware Trait
+ *
+ * Use this trait with @see \Cekurte\ComponentBundle\DependencyInjection\ContainerAware\AbstractContainerAware
  * 
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
@@ -23,28 +25,31 @@ use Doctrine\ORM\EntityManagerInterface;
 trait DoctrineContainerAwareTrait
 {
     /**
-     * @var EntityManagerInterface
-     */
-    protected $entityManager;
-
-    /**
-     * Set a instance of EntityManager
+     * Shortcut to return the Doctrine Registry service.
      *
-     * @param EntityManagerInterface $entityManager
+     * @return \Doctrine\Bundle\DoctrineBundle\Registry
+     *
+     * @throws \LogicException
      */
-    public function setEntityManager(EntityManagerInterface $entityManager)
+    public function getDoctrine()
     {
-        $this->entityManager = $entityManager;
+        if (!$this->getContainer()->has('doctrine')) {
+            throw new \LogicException('The DoctrineBundle is not registered in your application.');
+        }
+
+        return $this->getContainer()->get('doctrine');
     }
 
     /**
-     * Get a instance of EntityManager
+     * Get a instance of Entity Manager.
      *
-     * @return EntityManagerInterface
+     * @param string|null $name
+     *
+     * @return \Doctrine\Common\Persistence\ObjectManager
      */
-    public function getEntityManager()
+    public function getEntityManager($name = null)
     {
-        return $this->entityManager;
+        return $this->getDoctrine()->getManager($name);
     }
 
     /**

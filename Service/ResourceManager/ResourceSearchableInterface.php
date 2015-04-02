@@ -29,7 +29,7 @@ interface ResourceSearchableInterface extends ResourceInterface
      *
      * @param  array $parameters
      *
-     * @return mixed
+     * @return ResourceInterface
      *
      * @throws NotFoundHttpException
      */

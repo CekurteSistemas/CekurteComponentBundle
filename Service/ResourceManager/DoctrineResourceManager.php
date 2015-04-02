@@ -11,9 +11,11 @@
 
 namespace Cekurte\ComponentBundle\Service\ResourceManager;
 
+use Cekurte\ComponentBundle\DependencyInjection\ContainerAware\AbstractContainerAware;
 use Cekurte\ComponentBundle\DependencyInjection\ContainerAware\DoctrineContainerAwareTrait;
 use Cekurte\ComponentBundle\Service\ResourceManagerInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -23,7 +25,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  *
  * @version 2.0
  */
-class DoctrineResourceManager implements ResourceManagerInterface
+class DoctrineResourceManager extends AbstractContainerAware implements ResourceManagerInterface
 {
     use DoctrineContainerAwareTrait;
 
@@ -35,12 +37,12 @@ class DoctrineResourceManager implements ResourceManagerInterface
      /**
       * Init
       *
-      * @param EntityManagerInterface $entityManager
-      * @param string                 $resourceClassName
+      * @param ContainerInterface $container
+      * @param string             $resourceClassName
       */
-    public function __construct(EntityManagerInterface $entityManager, $resourceClassName)
+    public function __construct(ContainerInterface $container, $resourceClassName)
     {
-        $this->setEntityManager($entityManager);
+        $this->setContainer($container);
 
         $this->setResourceClassName($resourceClassName);
     }
@@ -76,25 +78,9 @@ class DoctrineResourceManager implements ResourceManagerInterface
     /**
      * @inheritdoc
      */
-    public function getResource(array $parameters)
+    public function getLogEntries(ResourceInterface $resource)
     {
-        return $this->findResource($parameters);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getResources(array $parameters = array())
-    {
-
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getLoggableResource(ResourceInterface $resource)
-    {
-
+        return $this->getRepository('\Gedmo\Loggable\Entity\LogEntry')->getLogEntries($resource);
     }
 
     /**
@@ -122,23 +108,29 @@ class DoctrineResourceManager implements ResourceManagerInterface
      */
     public function findResources(array $parameters = array())
     {
-
+        return $this->getRepository($this->getResourceClassName())->findBy($parameters);
     }
 
     /**
      * @inheritdoc
      */
-    public function writeResource(array $parameters)
+    public function writeResource(ResourceInterface $resource)
     {
+        $this->getEntityManager()->persist($resource);
+        $this->getEntityManager()->flush();
 
+        return true;
     }
 
     /**
      * @inheritdoc
      */
-    public function updateResource(ResourceInterface $resource, array $parameters)
+    public function updateResource(ResourceInterface $resource)
     {
+        $this->getEntityManager()->persist($resource);
+        $this->getEntityManager()->flush();
 
+        return true;
     }
 
     /**
@@ -146,6 +138,9 @@ class DoctrineResourceManager implements ResourceManagerInterface
      */
     public function deleteResource(ResourceInterface $resource)
     {
+        $this->getEntityManager()->remove($resource);
+        $this->getEntityManager()->flush();
 
+        return true;
     }
 }
