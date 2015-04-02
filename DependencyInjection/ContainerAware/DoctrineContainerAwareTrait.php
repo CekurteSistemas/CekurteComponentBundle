@@ -11,6 +11,8 @@
 
 namespace Cekurte\ComponentBundle\DependencyInjection\ContainerAware;
 
+use Doctrine\ORM\EntityManagerInterface;
+
 /**
  * Doctrine ContainerAware Trait
  * 
@@ -20,5 +22,40 @@ namespace Cekurte\ComponentBundle\DependencyInjection\ContainerAware;
  */
 trait DoctrineContainerAwareTrait
 {
+    /**
+     * @var EntityManagerInterface
+     */
+    protected $entityManager;
 
+    /**
+     * Set a instance of EntityManager
+     *
+     * @param EntityManagerInterface $entityManager
+     */
+    public function setEntityManager(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+    /**
+     * Get a instance of EntityManager
+     *
+     * @return EntityManagerInterface
+     */
+    public function getEntityManager()
+    {
+        return $this->entityManager;
+    }
+
+    /**
+     * Gets the repository for a class.
+     *
+     * @param string $className
+     *
+     * @return \Doctrine\Common\Persistence\ObjectRepository
+     */
+    public function getRepository($className)
+    {
+        return $this->getEntityManager()->getRepository($className);
+    }
 }

@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Cekurte\ComponentBundle\Service\Http\Rest;
+namespace Cekurte\ComponentBundle\Service\ResourceManager;
 
 /**
- * ServiceManager
+ * Resource Interface
  * 
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
  * @version 2.0
  */
-class ServiceManager
+interface ResourceInterface
 {
-
+    
 }
