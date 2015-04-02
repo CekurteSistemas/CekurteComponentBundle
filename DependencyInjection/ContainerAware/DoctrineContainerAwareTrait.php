@@ -55,12 +55,13 @@ trait DoctrineContainerAwareTrait
     /**
      * Gets the repository for a class.
      *
-     * @param string $className
+     * @param string      $className
+     * @param string|null $entityManagerName
      *
      * @return \Doctrine\Common\Persistence\ObjectRepository
      */
-    public function getRepository($className)
+    public function getRepository($className, $entityManagerName = null)
     {
-        return $this->getEntityManager()->getRepository($className);
+        return $this->getEntityManager($entityManagerName)->getRepository($className);
     }
 }
