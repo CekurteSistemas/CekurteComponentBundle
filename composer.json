@@ -18,13 +18,19 @@
         "symfony/framework-bundle": "~2.3"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.5"
+        "phpunit/phpunit": "~4.5",
+        "fabpot/php-cs-fixer": "*"
     },
     "suggest": {
         "jms/di-extra-bundle": "Allows to configure dependency injection using annotations"
     },
     "autoload": {
         "psr-4": {"Cekurte\\ComponentBundle\\": "src"}
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "bash contrib/setup.sh"
+        ]
     },
     "extra": {
         "branch-alias": {
