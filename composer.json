@@ -24,7 +24,7 @@
         "jms/di-extra-bundle": "Allows to configure dependency injection using annotations"
     },
     "autoload": {
-        "psr-4": {"Cekurte\\ComponentBundle\\": ""}
+        "psr-4": {"Cekurte\\ComponentBundle\\": "src"}
     },
     "extra": {
         "branch-alias": {

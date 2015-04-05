@@ -9,7 +9,7 @@
 - See also the [CekurteGeneratorBundle](https://github.com/jpcercal/CekurteGeneratorBundle) to build CRUD's automatically 
 with custom templates for REST Controllers, Entities, Services, Forms and Resources.
 - Currently this package contains only support for one resource manager, the Doctrine ORM. But, this bundle adds easy way to 
-  add any resource manager through the interface [ResourceManagerInterface](https://github.com/jpcercal/CekurteComponentBundle/blob/master/Service/ResourceManagerInterface.php), 
+  add any resource manager through the interface [ResourceManagerInterface](https://github.com/jpcercal/CekurteComponentBundle/blob/master/src/Service/ResourceManagerInterface.php), 
 **contribute with this project**! 
 
 ## Installation
