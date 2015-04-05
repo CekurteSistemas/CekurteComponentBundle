@@ -59,11 +59,14 @@ foreach ($output as $file) {
     $output = array();
     $return = null;
     exec("./vendor/bin/php-cs-fixer fix --dry-run --level=psr2 --diff --verbose " . escapeshellarg($fileName), $output, $return);
+
     if ($return != 0 || !empty($output)) {
-        echo "PHP file contains CS issues: " . $fileName . ":" . PHP_EOL;
-        echo implode(PHP_EOL, $output) . PHP_EOL;
-        $exit = 1;
-        continue;
+        if ($output[0] !== '.') {
+            echo "PHP file contains CS issues: " . $fileName . ":" . PHP_EOL;
+            echo implode(PHP_EOL, $output) . PHP_EOL;
+            $exit = 1;
+            continue;
+        }
     }
 }
 
