@@ -6,7 +6,9 @@
  * This pre-commit hooks will check for PHP errors (lint), and make sure the
  * code is PSR-2 compliant.
  *
- * Dependency: PHP-CS-Fixer (https://github.com/FriendsOfPHP/PHP-CS-Fixer)
+ * And run PHPUnit test tool to check if the source code is broken.
+ *
+ * Dependencies: PHP-CS-Fixer and PHPUnit.
  *
  * @author  Mardix  http://github.com/mardix
  * @author  Matthew Weier O'Phinney http://mwop.net/
@@ -58,7 +60,7 @@ foreach ($output as $file) {
      */
     $output = array();
     $return = null;
-    exec("./vendor/bin/php-cs-fixer fix --dry-run --level=psr2 --diff --verbose " . escapeshellarg($fileName), $output, $return);
+    exec("vendor/bin/php-cs-fixer fix --dry-run --level=psr2 --diff --verbose " . escapeshellarg($fileName), $output, $return);
 
     if ($return != 0 || !empty($output)) {
         if ($output[0] !== '.') {
@@ -68,6 +70,23 @@ foreach ($output as $file) {
             continue;
         }
     }
+}
+
+/*
+ * PHPUnit
+ */
+$output = array();
+$return = null;
+exec('vendor/bin/phpunit', $output, $return);
+
+if ($return !== 0) {
+    $minimalTestSummary = array_pop($output);
+    echo "Test suite failed: " . $minimalTestSummary . PHP_EOL;
+    $exit = 1;
+}
+
+if ($exit === 1) {
+    printf("ABORTING COMMIT!\n");
 }
 
 exit($exit);
