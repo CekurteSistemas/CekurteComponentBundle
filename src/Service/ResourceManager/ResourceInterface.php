@@ -13,12 +13,11 @@ namespace Cekurte\ComponentBundle\Service\ResourceManager;
 
 /**
  * Resource Interface
- * 
+ *
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
  * @version 2.0
  */
 interface ResourceInterface
 {
-    
 }

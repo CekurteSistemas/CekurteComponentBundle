@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * AbstractContainerAware
- * 
+ *
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
  * @version 2.0

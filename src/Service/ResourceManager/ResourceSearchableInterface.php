@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * ResourceSearchable Interface
- * 
+ *
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
  * @version 2.0

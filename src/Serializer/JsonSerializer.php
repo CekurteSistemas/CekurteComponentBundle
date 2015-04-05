@@ -15,7 +15,7 @@ use Cekurte\ComponentBundle\Service\ResourceManager\ResourceInterface;
 
 /**
  * JSON Serializer
- * 
+ *
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
  * @version 2.0

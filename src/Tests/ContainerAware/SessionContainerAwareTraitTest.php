@@ -10,6 +10,7 @@
  */
 
 namespace Cekurte\ComponentBundle\DependencyInjection\ContainerAware;
+
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 
 /**

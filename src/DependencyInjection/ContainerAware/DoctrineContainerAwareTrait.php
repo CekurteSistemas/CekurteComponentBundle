@@ -17,7 +17,7 @@ use Doctrine\ORM\EntityManagerInterface;
  * Doctrine ContainerAware Trait
  *
  * Use this trait with @see \Cekurte\ComponentBundle\DependencyInjection\ContainerAware\AbstractContainerAware
- * 
+ *
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
  * @version 2.0

@@ -13,14 +13,13 @@ namespace Cekurte\ComponentBundle\Twig\Extension;
 
 /**
  * Container Aware Extension
- * 
+ *
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
  * @version 2.0
  *
  * @abstract
  */
-class ContainerAwareExtension
+class AbstractContainerAwareExtension
 {
-
 }

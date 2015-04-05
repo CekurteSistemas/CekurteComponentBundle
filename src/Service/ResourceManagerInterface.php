@@ -20,7 +20,7 @@ use Cekurte\ComponentBundle\Service\ResourceManager\ResourceWritableInterface;
 
 /**
  * ResourceManager Interface
- * 
+ *
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
  * @version 2.0
@@ -33,5 +33,4 @@ interface ResourceManagerInterface extends
     ResourceUpdatableInterface,
     ResourceDeletableInterface
 {
-
 }

@@ -20,7 +20,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Doctrine ResourceManager
- * 
+ *
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
  * @version 2.0
@@ -93,7 +93,6 @@ abstract class DoctrineResourceManager extends AbstractContainerAware implements
         $resource = $this->getRepository($this->getResourceClassName())->findOneBy($parameters);
 
         if (!$resource) {
-
             throw new NotFoundHttpException(sprintf(
                 'The resource "%s" was not found. Filter conditions: "%s" with values "%s"',
                 $this->getResourceClassName(),

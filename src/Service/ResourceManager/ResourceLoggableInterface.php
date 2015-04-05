@@ -13,7 +13,7 @@ namespace Cekurte\ComponentBundle\Service\ResourceManager;
 
 /**
  * ResourceLoggable Interface
- * 
+ *
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
  * @version 2.0

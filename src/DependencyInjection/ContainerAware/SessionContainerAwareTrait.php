@@ -15,7 +15,7 @@ namespace Cekurte\ComponentBundle\DependencyInjection\ContainerAware;
  * Session ContainerAware Trait
  *
  * Use this trait with @see \Cekurte\ComponentBundle\DependencyInjection\ContainerAware\AbstractContainerAware
- * 
+ *
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
  * @version 2.0
