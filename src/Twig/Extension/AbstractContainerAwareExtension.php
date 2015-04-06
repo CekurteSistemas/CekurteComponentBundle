@@ -14,7 +14,6 @@ namespace Cekurte\ComponentBundle\Twig\Extension;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-
 /**
  * Container Aware Extension
  *
