@@ -11,6 +11,10 @@
 
 namespace Cekurte\ComponentBundle\Twig\Extension;
 
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
+
 /**
  * Container Aware Extension
  *
@@ -20,6 +24,17 @@ namespace Cekurte\ComponentBundle\Twig\Extension;
  *
  * @abstract
  */
-class AbstractContainerAwareExtension
+abstract class AbstractContainerAwareExtension extends \Twig_Extension
 {
+    use ContainerAwareTrait;
+
+    /**
+     * Get a instance of ContainerInterface.
+     *
+     * @return ContainerInterface
+     */
+    public function getContainer()
+    {
+        return $this->container;
+    }
 }
