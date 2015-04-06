@@ -12,12 +12,12 @@
 namespace Cekurte\ComponentBundle\Twig\Extension;
 
 /**
- * Role Extension
+ * SecurityRole Extension
  *
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
  * @version 2.0
  */
-class RoleExtension
+class SecurityRoleExtension
 {
 }
