@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Cekurte\ComponentBundle\DependencyInjection\ContainerAware;
+namespace Cekurte\ComponentBundle\Tests\DependencyInjection\ContainerAware;
 
 /**
  * Class DoctrineContainerAwareTraitTest

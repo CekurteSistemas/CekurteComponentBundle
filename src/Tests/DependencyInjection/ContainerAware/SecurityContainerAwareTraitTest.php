@@ -9,23 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace Cekurte\ComponentBundle\DependencyInjection\ContainerAware;
-
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
+namespace Cekurte\ComponentBundle\Tests\DependencyInjection\ContainerAware;
 
 /**
- * Class SessionContainerAwareTraitTest
+ * Class SecurityContainerAwareTraitTest
  *
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
  * @version 2.0
  */
-class SessionContainerAwareTraitTest extends \PHPUnit_Framework_TestCase
+class SecurityContainerAwareTraitTest extends \PHPUnit_Framework_TestCase
 {
-    public function testSessionTrait()
+    public function testUserTrait()
     {
         $mock = $this->getMockForTrait(
-            '\\Cekurte\\ComponentBundle\\DependencyInjection\\ContainerAware\\SessionContainerAwareTrait',
+            '\\Cekurte\\ComponentBundle\\DependencyInjection\\ContainerAware\\SecurityContainerAwareTrait',
             array(),
             '',
             true,
@@ -41,23 +39,18 @@ class SessionContainerAwareTraitTest extends \PHPUnit_Framework_TestCase
             ->getMock()
         ;
 
-        $session = $this
-            ->getMockBuilder('\\Symfony\\Component\\HttpFoundation\\Session\\Session')
+        $token = $this
+            ->getMockBuilder('FakeTokenInterface')
+            ->setMethods(array('getToken'))
             ->disableOriginalConstructor()
             ->getMock()
         ;
 
-        $flashBag = $this
-            ->getMockBuilder('\\Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBag')
+        $user = $this
+            ->getMockBuilder('FakeUserInterface')
+            ->setMethods(array('getUser'))
             ->disableOriginalConstructor()
             ->getMock()
-        ;
-
-        $session
-            ->expects($this->any())
-            ->method('getFlashBag')
-            ->withAnyParameters()
-            ->will($this->returnValue($flashBag))
         ;
 
         $container
@@ -67,11 +60,25 @@ class SessionContainerAwareTraitTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(true))
         ;
 
+        $user
+            ->expects($this->any())
+            ->method('getUser')
+            ->withAnyParameters()
+            ->will($this->returnValue(new \stdClass()))
+        ;
+
+        $token
+            ->expects($this->any())
+            ->method('getToken')
+            ->withAnyParameters()
+            ->will($this->returnValue($user))
+        ;
+
         $container
             ->expects($this->any())
             ->method('get')
             ->withAnyParameters()
-            ->will($this->returnValue($session))
+            ->will($this->returnValue($token))
         ;
 
         $mock
@@ -80,14 +87,6 @@ class SessionContainerAwareTraitTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($container))
         ;
 
-        $this->assertInstanceOf(
-            '\\Symfony\\Component\\HttpFoundation\\Session\\Session',
-            $mock->getSession()
-        );
-
-        $this->assertInstanceOf(
-            '\\Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBag',
-            $mock->getSession()->getFlashBag()
-        );
+        $this->assertEquals(new \stdClass(), $mock->getUser());
     }
 }

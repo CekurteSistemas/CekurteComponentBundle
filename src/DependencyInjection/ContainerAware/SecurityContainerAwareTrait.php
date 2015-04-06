@@ -12,7 +12,7 @@
 namespace Cekurte\ComponentBundle\DependencyInjection\ContainerAware;
 
 /**
- * User ContainerAware Trait
+ * Security ContainerAware Trait
  *
  * Use this trait with @see \Cekurte\ComponentBundle\DependencyInjection\ContainerAware\AbstractContainerAware
  *
@@ -20,24 +20,34 @@ namespace Cekurte\ComponentBundle\DependencyInjection\ContainerAware;
  *
  * @version 2.0
  */
-trait UserContainerAwareTrait
+trait SecurityContainerAwareTrait
 {
+    /**
+     * Get the Security Context.
+     *
+     * @return \Symfony\Component\Security\Core\SecurityContext
+     *
+     * @throws \LogicException If SecurityBundle is not available
+     */
+    public function getSecurityContext()
+    {
+        if (!$this->getContainer()->has('security.context')) {
+            throw new \LogicException('The SecurityBundle is not registered in your application.');
+        }
+
+        return $this->getContainer()->get('security.context');
+    }
+
     /**
      * Get a user from the Security Context.
      *
      * @return mixed
      *
      * @throws \LogicException If SecurityBundle is not available
-     *
-     * @see    \Symfony\Component\Security\Core\Authentication\Token\TokenInterface::getUser()
      */
     public function getUser()
     {
-        if (!$this->getContainer()->has('security.context')) {
-            throw new \LogicException('The SecurityBundle is not registered in your application.');
-        }
-
-        if (null === $token = $this->getContainer()->get('security.context')->getToken()) {
+        if (null === $token = $this->getSecurityContext()->getToken()) {
             return null;
         }
 
