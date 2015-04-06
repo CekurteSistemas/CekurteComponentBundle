@@ -27,7 +27,10 @@
         "jms/di-extra-bundle": "Allows to configure dependency injection using annotations"
     },
     "autoload": {
-        "psr-4": {"Cekurte\\ComponentBundle\\": "src"}
+        "psr-4": {"Cekurte\\ComponentBundle\\": "src/"}
+    },
+    "autoload-dev": {
+        "psr-4": {"Cekurte\\ComponentBundle\\Tests\\": "tests/"}
     },
     "scripts": {
         "post-install-cmd": [

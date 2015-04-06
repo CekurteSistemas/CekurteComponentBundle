@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Cekurte\ComponentBundle\Tests\DependencyInjection;
+namespace Cekurte\ComponentBundle\Tests\Controller\Http;
 
 use Cekurte\ComponentBundle\Controller\Http\RestController;
 use Cekurte\ComponentBundle\Controller\Http\RestControllerInterface;
@@ -31,12 +31,12 @@ class RestControllerTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $serializer = $this
-            ->getMockBuilder('\\Cekurte\ComponentBundle\Serializer\\SerializerInterface')
+            ->getMockBuilder('\\Cekurte\\ComponentBundle\\Serializer\\SerializerInterface')
             ->getMock()
         ;
 
         $resourceManager = $this
-            ->getMockBuilder('\\Cekurte\ComponentBundle\Service\\ResourceManagerInterface')
+            ->getMockBuilder('\\Cekurte\\ComponentBundle\\Service\\ResourceManagerInterface')
             ->getMock()
         ;
 
@@ -46,7 +46,7 @@ class RestControllerTest extends \PHPUnit_Framework_TestCase
     public function testInstanceOfGetSerializer()
     {
         $this->assertInstanceOf(
-            '\\Cekurte\ComponentBundle\Serializer\\SerializerInterface',
+            '\\Cekurte\\ComponentBundle\\Serializer\\SerializerInterface',
             $this->controller->getSerializer()
         );
     }
@@ -54,7 +54,7 @@ class RestControllerTest extends \PHPUnit_Framework_TestCase
     public function testInstanceOfGetResourceManager()
     {
         $this->assertInstanceOf(
-            '\\Cekurte\ComponentBundle\Service\\ResourceManagerInterface',
+            '\\Cekurte\\ComponentBundle\\Service\\ResourceManagerInterface',
             $this->controller->getResourceManager()
         );
     }
@@ -62,7 +62,7 @@ class RestControllerTest extends \PHPUnit_Framework_TestCase
     public function testInheritedOfSymfonyDefaultController()
     {
         $this->assertInstanceOf(
-            '\\Symfony\Bundle\FrameworkBundle\Controller\\Controller',
+            '\\Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller',
             $this->controller
         );
     }

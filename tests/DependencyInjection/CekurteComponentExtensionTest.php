@@ -64,7 +64,7 @@ class CekurteComponentExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(class_exists('\\Cekurte\\ComponentBundle\\Controller\\Http\\RestController'));
 
         $this->assertParameter(
-            'Cekurte\ComponentBundle\Controller\Http\RestController',
+            'Cekurte\\ComponentBundle\\Controller\\Http\\RestController',
             'cekurte_component.controller.http.rest.class'
         );
     }
@@ -74,7 +74,7 @@ class CekurteComponentExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(class_exists('\\Cekurte\\ComponentBundle\\Serializer\\JsonSerializer'));
 
         $this->assertParameter(
-            'Cekurte\ComponentBundle\Serializer\JsonSerializer',
+            'Cekurte\\ComponentBundle\\Serializer\\JsonSerializer',
             'cekurte_component.serializer.json.class'
         );
     }
@@ -84,7 +84,7 @@ class CekurteComponentExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(class_exists('\\Cekurte\\ComponentBundle\\Service\\ResourceManager\\DoctrineResourceManager'));
 
         $this->assertParameter(
-            'Cekurte\ComponentBundle\Service\ResourceManager\DoctrineResourceManager',
+            'Cekurte\\ComponentBundle\\Service\\ResourceManager\\DoctrineResourceManager',
             'cekurte_component.service.resource_manager.doctrine.class'
         );
     }
@@ -94,7 +94,7 @@ class CekurteComponentExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(class_exists('\\Cekurte\\ComponentBundle\\Twig\\Extension\\RouteInfoExtension'));
 
         $this->assertParameter(
-            'Cekurte\ComponentBundle\Twig\Extension\RouteInfoExtension',
+            'Cekurte\\ComponentBundle\\Twig\\Extension\\RouteInfoExtension',
             'cekurte_component.twig.extension.route_info.class'
         );
     }
@@ -104,7 +104,7 @@ class CekurteComponentExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(class_exists('\\Cekurte\\ComponentBundle\\Twig\\Extension\\SecurityRoleExtension'));
 
         $this->assertParameter(
-            'Cekurte\ComponentBundle\Twig\Extension\SecurityRoleExtension',
+            'Cekurte\\ComponentBundle\\Twig\\Extension\\SecurityRoleExtension',
             'cekurte_component.twig.extension.security_role.class'
         );
     }
