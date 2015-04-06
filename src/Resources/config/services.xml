@@ -8,9 +8,23 @@
         <parameter key="cekurte_component.controller.http.rest.class">Cekurte\ComponentBundle\Controller\Http\RestController</parameter>
         <parameter key="cekurte_component.serializer.json.class">Cekurte\ComponentBundle\Serializer\JsonSerializer</parameter>
         <parameter key="cekurte_component.service.resource_manager.doctrine.class">Cekurte\ComponentBundle\Service\ResourceManager\DoctrineResourceManager</parameter>
+        <parameter key="cekurte_component.twig.extension.route_info.class">Cekurte\ComponentBundle\Twig\Extension\RouteInfoExtension</parameter>
+        <parameter key="cekurte_component.twig.extension.security_role.class">Cekurte\ComponentBundle\Twig\Extension\SecurityRoleExtension</parameter>
     </parameters>
 
     <services>
         <service id="cekurte_component.serializer.json" class="%cekurte_component.serializer.json.class%"></service>
+        <service id="cekurte_component.twig.extension.route_info" class="%cekurte_component.twig.extension.route_info.class%">
+            <tag name="twig.extension" />
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+        <service id="cekurte_component.twig.extension.security_role" class="%cekurte_component.twig.extension.security_role.class%">
+            <tag name="twig.extension" />
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
     </services>
 </container>

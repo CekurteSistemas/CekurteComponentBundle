@@ -13,6 +13,7 @@ namespace Cekurte\ComponentBundle\Tests\DependencyInjection;
 
 use Cekurte\ComponentBundle\DependencyInjection\CekurteComponentExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Class CekurteComponentExtensionTest
@@ -88,10 +89,44 @@ class CekurteComponentExtensionTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testLoadParameterTwigExtensionRouteInfoClass()
+    {
+        $this->assertTrue(class_exists('\\Cekurte\\ComponentBundle\\Twig\\Extension\\RouteInfoExtension'));
+
+        $this->assertParameter(
+            'Cekurte\ComponentBundle\Twig\Extension\RouteInfoExtension',
+            'cekurte_component.twig.extension.route_info.class'
+        );
+    }
+
+    public function testLoadParameterTwigExtensionSecurityRoleClass()
+    {
+        $this->assertTrue(class_exists('\\Cekurte\\ComponentBundle\\Twig\\Extension\\SecurityRoleExtension'));
+
+        $this->assertParameter(
+            'Cekurte\ComponentBundle\Twig\Extension\SecurityRoleExtension',
+            'cekurte_component.twig.extension.security_role.class'
+        );
+    }
+
     public function testLoadHasDefinitionJsonSerializerClass()
     {
         $this->assertHasDefinition(
             'cekurte_component.serializer.json'
+        );
+    }
+
+    public function testLoadHasDefinitionTwigExtensionRouteInfoClass()
+    {
+        $this->assertHasDefinition(
+            'cekurte_component.twig.extension.route_info'
+        );
+    }
+
+    public function testLoadHasDefinitionTwigExtensionSecurityRoleClass()
+    {
+        $this->assertHasDefinition(
+            'cekurte_component.twig.extension.security_role'
         );
     }
 
@@ -100,5 +135,41 @@ class CekurteComponentExtensionTest extends \PHPUnit_Framework_TestCase
         $definition = $this->configuration->getDefinition('cekurte_component.serializer.json');
 
         $this->assertEquals('%cekurte_component.serializer.json.class%', $definition->getClass());
+    }
+
+    public function testLoadDefinitionTwigExtensionRouteInfoClass()
+    {
+        $definition = $this->configuration->getDefinition('cekurte_component.twig.extension.route_info');
+
+        $this->assertEquals('%cekurte_component.twig.extension.route_info.class%', $definition->getClass());
+
+        $this->assertTrue($definition->hasTag('twig.extension'));
+
+        $this->assertTrue($definition->hasMethodCall('setContainer'));
+
+        $methodCalls = $definition->getMethodCalls();
+
+        /** @var Reference $reference */
+        $reference = $methodCalls[0][1][0];
+
+        $this->assertEquals('service_container', (string) $reference);
+    }
+
+    public function testLoadDefinitionTwigExtensionSecurityRoleClass()
+    {
+        $definition = $this->configuration->getDefinition('cekurte_component.twig.extension.security_role');
+
+        $this->assertEquals('%cekurte_component.twig.extension.security_role.class%', $definition->getClass());
+
+        $this->assertTrue($definition->hasTag('twig.extension'));
+
+        $this->assertTrue($definition->hasMethodCall('setContainer'));
+
+        $methodCalls = $definition->getMethodCalls();
+
+        /** @var Reference $reference */
+        $reference = $methodCalls[0][1][0];
+
+        $this->assertEquals('service_container', (string) $reference);
     }
 }
