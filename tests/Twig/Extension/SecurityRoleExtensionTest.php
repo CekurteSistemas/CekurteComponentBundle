@@ -58,7 +58,6 @@ class SecurityRoleExtensionTest extends \PHPUnit_Framework_TestCase
         $args = func_get_args();
 
         if ($args[0] === 'security.context') {
-
             $securityContext = $this
                 ->getMockBuilder('\\Symfony\\Component\\Security\\Core\\SecurityContext')
                 ->disableOriginalConstructor()
@@ -68,7 +67,7 @@ class SecurityRoleExtensionTest extends \PHPUnit_Framework_TestCase
             $securityContext
                 ->expects($this->any())
                 ->method('isGranted')
-                ->will($this->returnCallback(function() {
+                ->will($this->returnCallback(function () {
 
                     $role = func_get_arg(0);
 
@@ -81,9 +80,7 @@ class SecurityRoleExtensionTest extends \PHPUnit_Framework_TestCase
             ;
 
             return $securityContext;
-
         } elseif ($args[0] === 'request') {
-
             $request = $this
                 ->getMockBuilder('\\Symfony\\Component\\HttpFoundation\\Request')
                 ->disableOriginalConstructor()
@@ -183,7 +180,6 @@ class SecurityRoleExtensionTest extends \PHPUnit_Framework_TestCase
         $roles = array('list', 'List', 'LIST');
 
         foreach ($roles as $role) {
-
             $this->assertEquals(
                 'ROLE_CEKURTECOMPONENTFAKE_COMPONENTFAKE',
                 $method->invokeArgs($this->extension, array($role))
@@ -193,7 +189,6 @@ class SecurityRoleExtensionTest extends \PHPUnit_Framework_TestCase
         $roles = array('retrieve', 'Retrieve', 'RETRIEVE');
 
         foreach ($roles as $role) {
-
             $this->assertEquals(
                 'ROLE_CEKURTECOMPONENTFAKE_COMPONENTFAKE_RETRIEVE',
                 $method->invokeArgs($this->extension, array($role))
