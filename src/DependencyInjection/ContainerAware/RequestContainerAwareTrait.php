@@ -25,7 +25,7 @@ trait RequestContainerAwareTrait
     /**
      * Shortcut to return the Request instance.
      *
-     * @return \Doctrine\Bundle\DoctrineBundle\Registry
+     * @return \Symfony\Component\HttpFoundation\Request
      *
      * @throws \LogicException
      */

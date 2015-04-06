@@ -25,7 +25,7 @@ trait SessionContainerAwareTrait
     /**
      * Shortcut to return the Session instance.
      *
-     * @return \Doctrine\Bundle\DoctrineBundle\Registry
+     * @return \Symfony\Component\HttpFoundation\Session\Session
      *
      * @throws \LogicException
      */
