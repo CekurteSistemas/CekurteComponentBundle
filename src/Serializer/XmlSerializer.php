@@ -11,24 +11,24 @@
 
 namespace Cekurte\ComponentBundle\Serializer;
 
-use JMS\Serializer\DeserializationContext;
 use JMS\Serializer\SerializationContext;
+use JMS\Serializer\DeserializationContext;
 
 /**
- * JSON Serializer
+ * XML Serializer
  *
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
  * @version 2.0
  */
-class JsonSerializer extends AbstractSerializer implements SerializerInterface
+class XmlSerializer extends AbstractSerializer implements SerializerInterface
 {
     /**
      * @inheritdoc
      */
     public function serialize($data, SerializationContext $context = null)
     {
-        return $this->getSerializer()->serialize($data, SerializerInterface::FORMAT_JSON, $context);
+        return $this->getSerializer()->serialize($data, SerializerInterface::FORMAT_XML, $context);
     }
 
     /**
@@ -36,6 +36,6 @@ class JsonSerializer extends AbstractSerializer implements SerializerInterface
      */
     public function deserialize($data, $type, DeserializationContext $context = null)
     {
-        return $this->getSerializer()->deserialize($data, $type, SerializerInterface::FORMAT_JSON, $context);
+        return $this->getSerializer()->deserialize($data, $type, SerializerInterface::FORMAT_XML, $context);
     }
 }
