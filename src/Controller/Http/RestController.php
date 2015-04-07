@@ -13,7 +13,6 @@ namespace Cekurte\ComponentBundle\Controller\Http;
 
 use Cekurte\ComponentBundle\Serializer\SerializerInterface;
 use Cekurte\ComponentBundle\Service\ResourceManagerInterface;
-use JMS\Serializer\SerializationContext;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**

@@ -11,9 +11,6 @@
 
 namespace Cekurte\ComponentBundle\Serializer;
 
-use JMS\Serializer\SerializationContext;
-use JMS\Serializer\DeserializationContext;
-
 /**
  * XML Serializer
  *
@@ -21,21 +18,13 @@ use JMS\Serializer\DeserializationContext;
  *
  * @version 2.0
  */
-class XmlSerializer extends AbstractSerializer implements SerializerInterface
+class XmlSerializer extends AbstractSerializer
 {
     /**
      * @inheritdoc
      */
-    public function serialize($data, SerializationContext $context = null)
+    public function getFormat()
     {
-        return $this->getSerializer()->serialize($data, SerializerInterface::FORMAT_XML, $context);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function deserialize($data, $type, DeserializationContext $context = null)
-    {
-        return $this->getSerializer()->deserialize($data, $type, SerializerInterface::FORMAT_XML, $context);
+        return 'xml';
     }
 }

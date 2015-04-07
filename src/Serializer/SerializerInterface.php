@@ -24,21 +24,6 @@ use JMS\Serializer\DeserializationContext;
 interface SerializerInterface
 {
     /**
-     * @var string
-     */
-    const FORMAT_JSON = 'json';
-
-    /**
-     * @var string
-     */
-    const FORMAT_XML = 'xml';
-
-    /**
-     * @var string
-     */
-    const FORMAT_YAML = 'yaml';
-
-    /**
      * Serializes the given data to the specified output format.
      *
      * @param object|array|scalar  $data

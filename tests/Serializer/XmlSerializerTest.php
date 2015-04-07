@@ -12,18 +12,18 @@
 namespace Cekurte\ComponentBundle\Tests\Serializer;
 
 /**
- * Class JsonSerializerTest
+ * Class XmlSerializerTest
  *
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
  * @version 2.0
  */
-class JsonSerializerTest extends \PHPUnit_Framework_TestCase
+class XmlSerializerTest extends \PHPUnit_Framework_TestCase
 {
     public function testInheritedOfAbstractSerializer()
     {
         $serializer = $this
-            ->getMockBuilder('\\Cekurte\\ComponentBundle\\Serializer\\JsonSerializer')
+            ->getMockBuilder('\\Cekurte\\ComponentBundle\\Serializer\\XmlSerializer')
             ->disableOriginalConstructor()
             ->getMock()
         ;
@@ -37,11 +37,11 @@ class JsonSerializerTest extends \PHPUnit_Framework_TestCase
     public function testMethodGetFormat()
     {
         $serializer = $this
-            ->getMockBuilder('\\Cekurte\\ComponentBundle\\Serializer\\JsonSerializer')
+            ->getMockBuilder('\\Cekurte\\ComponentBundle\\Serializer\\XmlSerializer')
             ->disableOriginalConstructor()
             ->getMockForAbstractClass()
         ;
 
-        $this->assertEquals('json', $serializer->getFormat());
+        $this->assertEquals('xml', $serializer->getFormat());
     }
 }
