@@ -11,8 +11,6 @@
 
 namespace Cekurte\ComponentBundle\Tests\Service\ServiceManager;
 
-use Cekurte\ComponentBundle\Service\ResourceManager\DoctrineResourceManager;
-
 /**
  * Class DoctrineResourceManagerTest
  *
@@ -139,13 +137,13 @@ class DoctrineResourceManagerTest extends \PHPUnit_Framework_TestCase
         return $container;
     }
 
-    public function testClassIsAbstract()
+    public function testClassIsNotAbstract()
     {
         $reflection = new \ReflectionClass(
             '\\Cekurte\\ComponentBundle\\Service\\ResourceManager\\DoctrineResourceManager'
         );
 
-        $this->assertTrue($reflection->isAbstract());
+        $this->assertFalse($reflection->isAbstract());
     }
 
     public function testInstanceOfResourceManagerInterface()
