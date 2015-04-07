@@ -12,19 +12,19 @@
 namespace Cekurte\ComponentBundle\Serializer;
 
 /**
- * JSON Serializer
+ * YAML Serializer
  *
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
  * @version 2.0
  */
-class JsonSerializer extends AbstractSerializer
+class YamlSerializer extends AbstractSerializer
 {
     /**
      * @inheritdoc
      */
     public function getFormat()
     {
-        return 'json';
+        return 'yaml';
     }
 }

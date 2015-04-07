@@ -11,7 +11,8 @@
 
 namespace Cekurte\ComponentBundle\Serializer;
 
-use Cekurte\ComponentBundle\Service\ResourceManager\ResourceInterface;
+use JMS\Serializer\SerializationContext;
+use JMS\Serializer\DeserializationContext;
 
 /**
  * Serializer Interface
@@ -23,46 +24,23 @@ use Cekurte\ComponentBundle\Service\ResourceManager\ResourceInterface;
 interface SerializerInterface
 {
     /**
-     * Encode a list of resources.
+     * Serializes the given data to the specified output format.
      *
-     * @api
+     * @param object|array|scalar  $data
+     * @param SerializationContext $context
      *
-     * @param  array $resources
-     *
-     * @return mixed
+     * @return string
      */
-    public function encodeResources(array $resources);
+    public function serialize($data, SerializationContext $context = null);
 
     /**
-     * Encode a resource.
+     * Deserializes the given data to the specified type.
      *
-     * @api
+     * @param string                 $data
+     * @param string                 $type
+     * @param DeserializationContext $context
      *
-     * @param  ResourceInterface $resource
-     *
-     * @return mixed
+     * @return object|array|scalar
      */
-    public function encodeResource(ResourceInterface $resource);
-
-    /**
-     * Decode a list of resources.
-     *
-     * @api
-     *
-     * @param  array $resources
-     *
-     * @return array
-     */
-    public function decodeResources(array $resources);
-
-    /**
-     * Decode a resource.
-     *
-     * @api
-     *
-     * @param  mixed $resource
-     *
-     * @return ResourceInterface
-     */
-    public function decodeResource($resource);
+    public function deserialize($data, $type, DeserializationContext $context = null);
 }
