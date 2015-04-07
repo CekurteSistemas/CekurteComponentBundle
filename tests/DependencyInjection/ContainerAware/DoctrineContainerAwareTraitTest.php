@@ -20,6 +20,15 @@ namespace Cekurte\ComponentBundle\Tests\DependencyInjection\ContainerAware;
  */
 class DoctrineContainerAwareTraitTest extends \PHPUnit_Framework_TestCase
 {
+    public function testIsTrait()
+    {
+        $reflection = new \ReflectionClass(
+            '\\Cekurte\\ComponentBundle\\DependencyInjection\\ContainerAware\\DoctrineContainerAwareTrait'
+        );
+
+        $this->assertTrue($reflection->isTrait());
+    }
+
     public function testDoctrineTrait()
     {
         $mock = $this->getMockForTrait(

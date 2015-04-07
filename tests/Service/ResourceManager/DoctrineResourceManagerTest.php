@@ -139,6 +139,26 @@ class DoctrineResourceManagerTest extends \PHPUnit_Framework_TestCase
         return $container;
     }
 
+    public function testClassIsAbstract()
+    {
+        $reflection = new \ReflectionClass(
+            '\\Cekurte\\ComponentBundle\\Service\\ResourceManager\\DoctrineResourceManager'
+        );
+
+        $this->assertTrue($reflection->isAbstract());
+    }
+
+    public function testInstanceOfResourceManagerInterface()
+    {
+        $reflection = new \ReflectionClass(
+            '\\Cekurte\\ComponentBundle\\Service\\ResourceManager\\DoctrineResourceManager'
+        );
+
+        $this->assertTrue($reflection->implementsInterface(
+            '\\Cekurte\\ComponentBundle\\Service\\ResourceManagerInterface'
+        ));
+    }
+
     public function testGetResourceClassName()
     {
         $mockEntityManager = $this->getMockEntityManager();

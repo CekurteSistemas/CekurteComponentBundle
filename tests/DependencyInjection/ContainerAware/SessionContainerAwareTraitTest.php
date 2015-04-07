@@ -22,6 +22,15 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
  */
 class SessionContainerAwareTraitTest extends \PHPUnit_Framework_TestCase
 {
+    public function testIsTrait()
+    {
+        $reflection = new \ReflectionClass(
+            '\\Cekurte\\ComponentBundle\\DependencyInjection\\ContainerAware\\SessionContainerAwareTrait'
+        );
+
+        $this->assertTrue($reflection->isTrait());
+    }
+
     public function testSessionTrait()
     {
         $mock = $this->getMockForTrait(

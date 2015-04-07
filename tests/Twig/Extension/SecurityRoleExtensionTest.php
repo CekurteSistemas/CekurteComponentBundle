@@ -170,7 +170,7 @@ class SecurityRoleExtensionTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testGetFormattedSpecificRole()
+    public function testGetSpecificRoleFormatted()
     {
         $class  = new \ReflectionClass($this->extension);
         $method = $class->getMethod('getSpecificRoleFormatted');
@@ -196,7 +196,7 @@ class SecurityRoleExtensionTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testIsGrantedFalse()
+    public function testIsGranted()
     {
         $class  = new \ReflectionClass($this->extension);
         $method = $class->getMethod('isGranted');
@@ -204,14 +204,6 @@ class SecurityRoleExtensionTest extends \PHPUnit_Framework_TestCase
         $method->setAccessible(true);
 
         $this->assertFalse($method->invokeArgs($this->extension, array('RETRIEVE')));
-    }
-
-    public function testIsGrantedTrue()
-    {
-        $class  = new \ReflectionClass($this->extension);
-        $method = $class->getMethod('isGranted');
-
-        $method->setAccessible(true);
 
         $this->assertTrue($method->invokeArgs($this->extension, array('LIST')));
     }
