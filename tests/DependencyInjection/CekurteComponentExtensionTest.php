@@ -59,46 +59,6 @@ class CekurteComponentExtensionTest extends \PHPUnit_Framework_TestCase
         $loader->load(array(), $this->configuration);
     }
 
-    public function testLoadParameterControllerHttpRestClass()
-    {
-        $this->assertTrue(class_exists('\\Cekurte\\ComponentBundle\\Controller\\Http\\RestController'));
-
-        $this->assertParameter(
-            'Cekurte\\ComponentBundle\\Controller\\Http\\RestController',
-            'cekurte_component.controller.http.rest.class'
-        );
-    }
-
-    public function testLoadParameterJsonSerializerClass()
-    {
-        $this->assertTrue(class_exists('\\Cekurte\\ComponentBundle\\Serializer\\JsonSerializer'));
-
-        $this->assertParameter(
-            'Cekurte\\ComponentBundle\\Serializer\\JsonSerializer',
-            'cekurte_component.serializer.json.class'
-        );
-    }
-
-    public function testLoadParameterXmlSerializerClass()
-    {
-        $this->assertTrue(class_exists('\\Cekurte\\ComponentBundle\\Serializer\\XmlSerializer'));
-
-        $this->assertParameter(
-            'Cekurte\\ComponentBundle\\Serializer\\XmlSerializer',
-            'cekurte_component.serializer.xml.class'
-        );
-    }
-
-    public function testLoadParameterYamlSerializerClass()
-    {
-        $this->assertTrue(class_exists('\\Cekurte\\ComponentBundle\\Serializer\\YamlSerializer'));
-
-        $this->assertParameter(
-            'Cekurte\\ComponentBundle\\Serializer\\YamlSerializer',
-            'cekurte_component.serializer.yaml.class'
-        );
-    }
-
     public function testLoadParameterServiceDoctrineResourceManagerClass()
     {
         $this->assertTrue(class_exists('\\Cekurte\\ComponentBundle\\Service\\ResourceManager\\DoctrineResourceManager'));
@@ -129,27 +89,6 @@ class CekurteComponentExtensionTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testLoadHasDefinitionJsonSerializerClass()
-    {
-        $this->assertHasDefinition(
-            'cekurte_component.serializer.json'
-        );
-    }
-
-    public function testLoadHasDefinitionXmlSerializerClass()
-    {
-        $this->assertHasDefinition(
-            'cekurte_component.serializer.xml'
-        );
-    }
-
-    public function testLoadHasDefinitionYamlSerializerClass()
-    {
-        $this->assertHasDefinition(
-            'cekurte_component.serializer.yaml'
-        );
-    }
-
     public function testLoadHasDefinitionTwigExtensionRouteInfoClass()
     {
         $this->assertHasDefinition(
@@ -162,48 +101,6 @@ class CekurteComponentExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertHasDefinition(
             'cekurte_component.twig.extension.security_role'
         );
-    }
-
-    public function testLoadDefinitionJsonSerializerClass()
-    {
-        $definition = $this->configuration->getDefinition('cekurte_component.serializer.json');
-
-        $this->assertEquals('%cekurte_component.serializer.json.class%', $definition->getClass());
-
-        $arguments = $definition->getArguments();
-
-        /** @var Reference $reference */
-        $reference = $arguments[0];
-
-        $this->assertEquals('jms_serializer', (string) $reference);
-    }
-
-    public function testLoadDefinitionXmlSerializerClass()
-    {
-        $definition = $this->configuration->getDefinition('cekurte_component.serializer.xml');
-
-        $this->assertEquals('%cekurte_component.serializer.xml.class%', $definition->getClass());
-
-        $arguments = $definition->getArguments();
-
-        /** @var Reference $reference */
-        $reference = $arguments[0];
-
-        $this->assertEquals('jms_serializer', (string) $reference);
-    }
-
-    public function testLoadDefinitionYamlSerializerClass()
-    {
-        $definition = $this->configuration->getDefinition('cekurte_component.serializer.yaml');
-
-        $this->assertEquals('%cekurte_component.serializer.yaml.class%', $definition->getClass());
-
-        $arguments = $definition->getArguments();
-
-        /** @var Reference $reference */
-        $reference = $arguments[0];
-
-        $this->assertEquals('jms_serializer', (string) $reference);
     }
 
     public function testLoadDefinitionTwigExtensionRouteInfoClass()
