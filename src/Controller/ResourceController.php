@@ -9,26 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace Cekurte\ComponentBundle\Controller\Http;
+namespace Cekurte\ComponentBundle\Controller;
 
-use Cekurte\ComponentBundle\Serializer\SerializerInterface;
 use Cekurte\ComponentBundle\Service\ResourceManagerInterface;
+use JMS\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
- * RestController
+ * ResourceController
  *
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
  * @version 2.0
  */
-class RestController extends Controller implements RestControllerInterface
+class ResourceController extends Controller implements ResourceControllerInterface
 {
-    /**
-     * @var SerializerInterface
-     */
-    protected $serializer;
-
     /**
      * @var ResourceManagerInterface
      */
@@ -37,21 +32,11 @@ class RestController extends Controller implements RestControllerInterface
     /**
      * Init
      *
-     * @param SerializerInterface      $serializer
      * @param ResourceManagerInterface $resourceManager
      */
-    public function __construct(SerializerInterface $serializer, ResourceManagerInterface $resourceManager)
+    public function __construct(ResourceManagerInterface $resourceManager)
     {
-        $this->serializer      = $serializer;
         $this->resourceManager = $resourceManager;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getSerializer()
-    {
-        return $this->serializer;
     }
 
     /**
@@ -60,5 +45,21 @@ class RestController extends Controller implements RestControllerInterface
     public function getResourceManager()
     {
         return $this->resourceManager;
+    }
+
+    /**
+     * Get a instance of JMS Serializer.
+     *
+     * @throws \LogicException
+     *
+     * @return SerializerInterface
+     */
+    public function getSerializer()
+    {
+        if (!$this->container->has('jms_serializer')) {
+            throw new \LogicException('The JMSSerializerBundle is not registered in your application.');
+        }
+
+        return $this->container->get('jms_serializer');
     }
 }

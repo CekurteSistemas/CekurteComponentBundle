@@ -9,31 +9,34 @@
  * file that was distributed with this source code.
  */
 
-namespace Cekurte\ComponentBundle\Controller\Http;
+namespace Cekurte\ComponentBundle\Controller;
 
-use Cekurte\ComponentBundle\Serializer\SerializerInterface;
 use Cekurte\ComponentBundle\Service\ResourceManagerInterface;
+use JMS\Serializer\SerializerInterface;
 
 /**
- * RestController Interface
+ * ResourceController Interface
  *
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
  * @version 2.0
  */
-interface RestControllerInterface
+interface ResourceControllerInterface
 {
-    /**
-     * Get a instance of Serializer
-     *
-     * @return SerializerInterface
-     */
-    public function getSerializer();
-
     /**
      * Get a instance of Resource Manager
      *
      * @return ResourceManagerInterface
      */
     public function getResourceManager();
+
+
+    /**
+     * Get a instance of JMS Serializer.
+     *
+     * @throws \LogicException
+     *
+     * @return SerializerInterface
+     */
+    public function getSerializer();
 }
