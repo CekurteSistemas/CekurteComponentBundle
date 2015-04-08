@@ -5,25 +5,15 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="cekurte_component.controller.http.rest.class">Cekurte\ComponentBundle\Controller\Http\RestController</parameter>
-        <parameter key="cekurte_component.serializer.json.class">Cekurte\ComponentBundle\Serializer\JsonSerializer</parameter>
-        <parameter key="cekurte_component.serializer.xml.class">Cekurte\ComponentBundle\Serializer\XmlSerializer</parameter>
-        <parameter key="cekurte_component.serializer.yaml.class">Cekurte\ComponentBundle\Serializer\YamlSerializer</parameter>
         <parameter key="cekurte_component.service.resource_manager.doctrine.class">Cekurte\ComponentBundle\Service\ResourceManager\DoctrineResourceManager</parameter>
+
         <parameter key="cekurte_component.twig.extension.route_info.class">Cekurte\ComponentBundle\Twig\Extension\RouteInfoExtension</parameter>
         <parameter key="cekurte_component.twig.extension.security_role.class">Cekurte\ComponentBundle\Twig\Extension\SecurityRoleExtension</parameter>
+
+        <parameter key="cekurte_component.event_listener.response.class">Cekurte\ComponentBundle\EventListener\ResponseListener</parameter>
     </parameters>
 
     <services>
-        <service id="cekurte_component.serializer.json" class="%cekurte_component.serializer.json.class%">
-            <argument type="service" id="jms_serializer" />
-        </service>
-        <service id="cekurte_component.serializer.xml" class="%cekurte_component.serializer.xml.class%">
-            <argument type="service" id="jms_serializer" />
-        </service>
-        <service id="cekurte_component.serializer.yaml" class="%cekurte_component.serializer.yaml.class%">
-            <argument type="service" id="jms_serializer" />
-        </service>
         <service id="cekurte_component.twig.extension.route_info" class="%cekurte_component.twig.extension.route_info.class%">
             <tag name="twig.extension" />
             <call method="setContainer">
@@ -35,6 +25,11 @@
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
+        </service>
+
+        <service id="cekurte_component.event_listener.response" class="%cekurte_component.event_listener.response.class%">
+            <tag name="kernel.event_subscriber" />
+            <argument type="service" id="jms_serializer" />
         </service>
     </services>
 </container>
