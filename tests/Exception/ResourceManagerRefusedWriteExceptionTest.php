@@ -11,6 +11,7 @@
 
 namespace Cekurte\ComponentBundle\Tests\Exception;
 
+use Cekurte\ComponentBundle\Exception\ResourceException;
 use Cekurte\ComponentBundle\Exception\ResourceManagerRefusedWriteException;
 
 /**
@@ -30,5 +31,12 @@ class ResourceManagerRefusedWriteExceptionTest extends \PHPUnit_Framework_TestCa
             '\\Cekurte\\ComponentBundle\\Exception\\ResourceManagerRefusedException',
             $exception
         );
+    }
+
+    public function testGetCode()
+    {
+        $exception = new ResourceManagerRefusedWriteException();
+
+        $this->assertEquals(ResourceException::RESOURCE_MANAGER_REFUSED_WRITE_ERROR_CODE, $exception->getCode());
     }
 }

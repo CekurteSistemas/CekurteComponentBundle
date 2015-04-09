@@ -11,6 +11,7 @@
 
 namespace Cekurte\ComponentBundle\Tests\Exception;
 
+use Cekurte\ComponentBundle\Exception\ResourceException;
 use Cekurte\ComponentBundle\Exception\ResourceManagerRefusedGetLogException;
 
 /**
@@ -30,5 +31,12 @@ class ResourceManagerRefusedGetLogExceptionTest extends \PHPUnit_Framework_TestC
             '\\Cekurte\\ComponentBundle\\Exception\\ResourceManagerRefusedGetLogException',
             $exception
         );
+    }
+
+    public function testGetCode()
+    {
+        $exception = new ResourceManagerRefusedGetLogException();
+
+        $this->assertEquals(ResourceException::RESOURCE_MANAGER_REFUSED_GETLOG_ERROR_CODE, $exception->getCode());
     }
 }

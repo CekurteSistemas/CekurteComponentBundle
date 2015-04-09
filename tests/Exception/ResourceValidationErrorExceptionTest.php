@@ -11,6 +11,7 @@
 
 namespace Cekurte\ComponentBundle\Tests\Exception;
 
+use Cekurte\ComponentBundle\Exception\ResourceException;
 use Cekurte\ComponentBundle\Exception\ResourceValidationErrorException;
 
 /**
@@ -30,5 +31,12 @@ class ResourceValidationErrorExceptionTest extends \PHPUnit_Framework_TestCase
             '\\Cekurte\\ComponentBundle\\Exception\\ResourceException',
             $exception
         );
+    }
+
+    public function testGetCode()
+    {
+        $exception = new ResourceValidationErrorException();
+
+        $this->assertEquals(ResourceException::RESOURCE_VALIDATION_ERROR_CODE, $exception->getCode());
     }
 }

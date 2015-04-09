@@ -20,4 +20,14 @@ namespace Cekurte\ComponentBundle\Exception;
  */
 class ResourceValidationErrorException extends ResourceException
 {
+    /**
+     * Init.
+     *
+     * @param string     $message
+     * @param \Exception $previous
+     */
+    public function __construct($message = "", \Exception $previous = null)
+    {
+        parent::__construct($message, ResourceException::RESOURCE_VALIDATION_ERROR_CODE, $previous);
+    }
 }

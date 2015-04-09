@@ -12,6 +12,7 @@
 namespace Cekurte\ComponentBundle\Tests\Exception;
 
 use Cekurte\ComponentBundle\Exception\ResourceDeserializeDataException;
+use Cekurte\ComponentBundle\Exception\ResourceException;
 
 /**
  * Class ResourceDeserializeDataExceptionTest
@@ -30,5 +31,12 @@ class ResourceDeserializeDataExceptionTest extends \PHPUnit_Framework_TestCase
             '\\Cekurte\\ComponentBundle\\Exception\\ResourceException',
             $exception
         );
+    }
+
+    public function testGetCode()
+    {
+        $exception = new ResourceDeserializeDataException();
+
+        $this->assertEquals(ResourceException::RESOURCE_DESERIALIZE_DATA_ERROR_CODE, $exception->getCode());
     }
 }

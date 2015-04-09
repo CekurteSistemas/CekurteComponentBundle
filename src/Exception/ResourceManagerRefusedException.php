@@ -20,4 +20,11 @@ namespace Cekurte\ComponentBundle\Exception;
  */
 class ResourceManagerRefusedException extends ResourceException
 {
+    /**
+     * @inheritdoc
+     */
+    public function __construct($message = "", $code = ResourceException::RESOURCE_MANAGER_REFUSED_ERROR_CODE, \Exception $previous = null)
+    {
+        parent::__construct($message, $code, $previous);
+    }
 }

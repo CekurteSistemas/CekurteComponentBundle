@@ -20,4 +20,14 @@ namespace Cekurte\ComponentBundle\Exception;
  */
 class ResourceManagerRefusedUpdateException extends ResourceManagerRefusedException
 {
+    /**
+     * Init.
+     *
+     * @param string     $message
+     * @param \Exception $previous
+     */
+    public function __construct($message = "", \Exception $previous = null)
+    {
+        parent::__construct($message, ResourceException::RESOURCE_MANAGER_REFUSED_UPDATE_ERROR_CODE, $previous);
+    }
 }

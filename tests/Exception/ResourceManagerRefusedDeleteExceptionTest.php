@@ -11,6 +11,7 @@
 
 namespace Cekurte\ComponentBundle\Tests\Exception;
 
+use Cekurte\ComponentBundle\Exception\ResourceException;
 use Cekurte\ComponentBundle\Exception\ResourceManagerRefusedDeleteException;
 
 /**
@@ -30,5 +31,12 @@ class ResourceManagerRefusedDeleteExceptionTest extends \PHPUnit_Framework_TestC
             '\\Cekurte\\ComponentBundle\\Exception\\ResourceManagerRefusedException',
             $exception
         );
+    }
+
+    public function testGetCode()
+    {
+        $exception = new ResourceManagerRefusedDeleteException();
+
+        $this->assertEquals(ResourceException::RESOURCE_MANAGER_REFUSED_DELETE_ERROR_CODE, $exception->getCode());
     }
 }

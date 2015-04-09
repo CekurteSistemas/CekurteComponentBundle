@@ -20,4 +20,14 @@ namespace Cekurte\ComponentBundle\Exception;
  */
 class ResourceManagerRefusedDeleteException extends ResourceManagerRefusedException
 {
+    /**
+     * Init.
+     *
+     * @param string     $message
+     * @param \Exception $previous
+     */
+    public function __construct($message = "", \Exception $previous = null)
+    {
+        parent::__construct($message, ResourceException::RESOURCE_MANAGER_REFUSED_DELETE_ERROR_CODE, $previous);
+    }
 }

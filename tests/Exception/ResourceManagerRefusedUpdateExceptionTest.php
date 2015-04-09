@@ -11,6 +11,7 @@
 
 namespace Cekurte\ComponentBundle\Tests\Exception;
 
+use Cekurte\ComponentBundle\Exception\ResourceException;
 use Cekurte\ComponentBundle\Exception\ResourceManagerRefusedUpdateException;
 
 /**
@@ -30,5 +31,12 @@ class ResourceManagerRefusedUpdateExceptionTest extends \PHPUnit_Framework_TestC
             '\\Cekurte\\ComponentBundle\\Exception\\ResourceManagerRefusedException',
             $exception
         );
+    }
+
+    public function testGetCode()
+    {
+        $exception = new ResourceManagerRefusedUpdateException();
+
+        $this->assertEquals(ResourceException::RESOURCE_MANAGER_REFUSED_UPDATE_ERROR_CODE, $exception->getCode());
     }
 }

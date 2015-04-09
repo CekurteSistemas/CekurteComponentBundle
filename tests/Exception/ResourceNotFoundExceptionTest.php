@@ -11,6 +11,7 @@
 
 namespace Cekurte\ComponentBundle\Tests\Exception;
 
+use Cekurte\ComponentBundle\Exception\ResourceException;
 use Cekurte\ComponentBundle\Exception\ResourceNotFoundException;
 
 /**
@@ -30,5 +31,12 @@ class ResourceNotFoundExceptionTest extends \PHPUnit_Framework_TestCase
             '\\Cekurte\\ComponentBundle\\Exception\\ResourceException',
             $exception
         );
+    }
+
+    public function testGetCode()
+    {
+        $exception = new ResourceNotFoundException();
+
+        $this->assertEquals(ResourceException::RESOURCE_NOTFOUND_ERROR_CODE, $exception->getCode());
     }
 }

@@ -31,4 +31,11 @@ class ResourceExceptionTest extends \PHPUnit_Framework_TestCase
             $exception
         );
     }
+
+    public function testGetCode()
+    {
+        $exception = new ResourceException();
+
+        $this->assertEquals(ResourceException::RESOURCE_ERROR_CODE, $exception->getCode());
+    }
 }
