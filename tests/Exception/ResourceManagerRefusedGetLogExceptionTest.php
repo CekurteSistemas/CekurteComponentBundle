@@ -24,7 +24,7 @@ class ResourceManagerRefusedGetLogExceptionTest extends \PHPUnit_Framework_TestC
 {
     public function testInheritedOfResourceException()
     {
-        $exception = new ResourceManagerRefusedLogException();
+        $exception = new ResourceManagerRefusedGetLogException();
 
         $this->assertInstanceOf(
             '\\Cekurte\\ComponentBundle\\Exception\\ResourceManagerRefusedGetLogException',
