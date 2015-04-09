@@ -15,6 +15,7 @@ use Cekurte\ComponentBundle\Exception\ResourceDeserializeDataException;
 use Cekurte\ComponentBundle\Exception\ResourceException;
 use Cekurte\ComponentBundle\Exception\ResourceManagerRefusedException;
 use Cekurte\ComponentBundle\Exception\ResourceNotFoundException;
+use Cekurte\ComponentBundle\Exception\ResourceSerializeDataException;
 use Cekurte\ComponentBundle\Exception\ResourceValidationErrorException;
 use Cekurte\ComponentBundle\HttpFoundation\SerializedResponse;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -57,6 +58,13 @@ class ExceptionListener implements EventSubscriberInterface
                 'code'    => $exception->getCode(),
                 'message' => $exception->getMessage(),
             ), Response::HTTP_NOT_FOUND));
+        }
+
+        if ($exception instanceof ResourceSerializeDataException) {
+            return $event->setResponse(new SerializedResponse(array(
+                'code'    => $exception->getCode(),
+                'message' => $exception->getMessage(),
+            ), Response::HTTP_BAD_REQUEST));
         }
 
         if ($exception instanceof ResourceDeserializeDataException) {
