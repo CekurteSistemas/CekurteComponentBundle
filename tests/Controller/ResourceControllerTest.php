@@ -64,7 +64,7 @@ class ResourceControllerTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testgetSerializer()
+    public function testGetSerializer()
     {
         $serializer = $this
             ->getMockBuilder('\\JMS\\Serializer\\Serializer')
@@ -99,5 +99,105 @@ class ResourceControllerTest extends \PHPUnit_Framework_TestCase
             '\\JMS\\Serializer\\SerializerInterface',
             $this->controller->getSerializer()
         );
+    }
+
+    /**
+     * @expectedException \LogicException
+     */
+    public function testGetSerializerAndExpectedALogicException()
+    {
+        $container = $this
+            ->getMockBuilder('\\Symfony\\Component\\DependencyInjection\\Container')
+            ->setMethods(array('has', 'get'))
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+
+        $container
+            ->expects($this->any())
+            ->method('has')
+            ->withAnyParameters()
+            ->will($this->returnValue(false))
+        ;
+
+        $this->controller->setContainer($container);
+
+        $this->controller->getSerializer();
+    }
+
+    public function testGetValidator()
+    {
+        $validator = $this
+            ->getMockBuilder('\\Symfony\\Component\\Validator\\Validator\\ValidatorInterface')
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+
+        $container = $this
+            ->getMockBuilder('\\Symfony\\Component\\DependencyInjection\\Container')
+            ->setMethods(array('has', 'get'))
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+
+        $container
+            ->expects($this->any())
+            ->method('has')
+            ->withAnyParameters()
+            ->will($this->returnValue(true))
+        ;
+
+        $container
+            ->expects($this->any())
+            ->method('get')
+            ->withAnyParameters()
+            ->will($this->returnValue($validator))
+        ;
+
+        $this->controller->setContainer($container);
+
+        $this->assertInstanceOf(
+            '\\Symfony\\Component\\Validator\\Validator\\ValidatorInterface',
+            $this->controller->getValidator()
+        );
+    }
+
+    /**
+     * @expectedException \LogicException
+     */
+    public function testGetValidatorAndExpectedALogicException()
+    {
+        $container = $this
+            ->getMockBuilder('\\Symfony\\Component\\DependencyInjection\\Container')
+            ->setMethods(array('has', 'get'))
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+
+        $container
+            ->expects($this->any())
+            ->method('has')
+            ->withAnyParameters()
+            ->will($this->returnValue(false))
+        ;
+
+        $this->controller->setContainer($container);
+
+        $this->controller->getValidator();
+    }
+
+    public function testGetRequestedDataAs()
+    {
+
+    }
+
+    public function testResourceIsValid()
+    {
+
+    }
+
+    public function testRenderSerializedResponseToOperation()
+    {
+
     }
 }
