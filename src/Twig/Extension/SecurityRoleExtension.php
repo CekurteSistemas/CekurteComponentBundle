@@ -52,7 +52,7 @@ class SecurityRoleExtension extends RouteInfoExtension
      */
     protected function getSpecificRoleSuffix($role)
     {
-        return (empty($role) or 'LIST' === strtoupper($role))
+        return (empty($role) || 'LIST' === strtoupper($role))
             ? ''
             : self::ROLE_SEPARATOR . strtoupper($role)
         ;
