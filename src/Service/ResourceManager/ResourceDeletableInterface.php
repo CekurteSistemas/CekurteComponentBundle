@@ -11,6 +11,8 @@
 
 namespace Cekurte\ComponentBundle\Service\ResourceManager;
 
+use Cekurte\ComponentBundle\Exception\ResourceManagerRefusedDeleteException;
+
 /**
  * ResourceDeletable Interface
  *
@@ -29,7 +31,7 @@ interface ResourceDeletableInterface extends ResourceInterface
      *
      * @return bool
      *
-     * @throws \Exception
+     * @throws ResourceManagerRefusedDeleteException
      */
     public function deleteResource(ResourceInterface $resource);
 }

@@ -13,10 +13,14 @@ namespace Cekurte\ComponentBundle\Service\ResourceManager;
 
 use Cekurte\ComponentBundle\DependencyInjection\ContainerAware\AbstractContainerAware;
 use Cekurte\ComponentBundle\DependencyInjection\ContainerAware\DoctrineContainerAwareTrait;
+use Cekurte\ComponentBundle\Exception\ResourceManagerRefusedDeleteException;
+use Cekurte\ComponentBundle\Exception\ResourceManagerRefusedGetLogException;
+use Cekurte\ComponentBundle\Exception\ResourceManagerRefusedUpdateException;
+use Cekurte\ComponentBundle\Exception\ResourceManagerRefusedWriteException;
+use Cekurte\ComponentBundle\Exception\ResourceNotFoundException;
 use Cekurte\ComponentBundle\Service\ResourceManagerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Doctrine ResourceManager
@@ -80,7 +84,11 @@ class DoctrineResourceManager extends AbstractContainerAware implements Resource
      */
     public function getLogEntries(ResourceInterface $resource)
     {
-        return $this->getRepository('\Gedmo\Loggable\Entity\LogEntry')->getLogEntries($resource);
+        try {
+            return $this->getRepository('\Gedmo\Loggable\Entity\LogEntry')->getLogEntries($resource);
+        } catch (\Exception $e) {
+            throw new ResourceManagerRefusedGetLogException($e->getMessage());
+        }
     }
 
     /**
@@ -91,7 +99,7 @@ class DoctrineResourceManager extends AbstractContainerAware implements Resource
         $resource = $this->getRepository($this->getResourceClassName())->findOneBy($parameters);
 
         if (!$resource) {
-            throw new NotFoundHttpException(sprintf(
+            throw new ResourceNotFoundException(sprintf(
                 'The resource "%s" was not found. Filter conditions: "%s" with values "%s"',
                 $this->getResourceClassName(),
                 implode(', ', array_keys($parameters)),
@@ -115,10 +123,14 @@ class DoctrineResourceManager extends AbstractContainerAware implements Resource
      */
     public function writeResource(ResourceInterface $resource)
     {
-        $this->getEntityManager()->persist($resource);
-        $this->getEntityManager()->flush();
+        try {
+            $this->getEntityManager()->persist($resource);
+            $this->getEntityManager()->flush();
 
-        return true;
+            return true;
+        } catch (\Exception $e) {
+            throw new ResourceManagerRefusedWriteException($e->getMessage());
+        }
     }
 
     /**
@@ -126,10 +138,14 @@ class DoctrineResourceManager extends AbstractContainerAware implements Resource
      */
     public function updateResource(ResourceInterface $resource)
     {
-        $this->getEntityManager()->persist($resource);
-        $this->getEntityManager()->flush();
+        try {
+            $this->getEntityManager()->persist($resource);
+            $this->getEntityManager()->flush();
 
-        return true;
+            return true;
+        } catch (\Exception $e) {
+            throw new ResourceManagerRefusedUpdateException($e->getMessage());
+        }
     }
 
     /**
@@ -137,9 +153,13 @@ class DoctrineResourceManager extends AbstractContainerAware implements Resource
      */
     public function deleteResource(ResourceInterface $resource)
     {
-        $this->getEntityManager()->remove($resource);
-        $this->getEntityManager()->flush();
+        try {
+            $this->getEntityManager()->remove($resource);
+            $this->getEntityManager()->flush();
 
-        return true;
+            return true;
+        } catch (\Exception $e) {
+            throw new ResourceManagerRefusedDeleteException($e->getMessage());
+        }
     }
 }

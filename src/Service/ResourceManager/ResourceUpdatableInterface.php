@@ -11,6 +11,8 @@
 
 namespace Cekurte\ComponentBundle\Service\ResourceManager;
 
+use Cekurte\ComponentBundle\Exception\ResourceManagerRefusedUpdateException;
+
 /**
  * ResourceUpdatable Interface
  *
@@ -29,7 +31,7 @@ interface ResourceUpdatableInterface extends ResourceInterface
      *
      * @return bool
      *
-     * @throws \Exception
+     * @throws ResourceManagerRefusedUpdateException
      */
     public function updateResource(ResourceInterface $resource);
 }

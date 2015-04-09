@@ -11,7 +11,7 @@
 
 namespace Cekurte\ComponentBundle\Service\ResourceManager;
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Cekurte\ComponentBundle\Exception\ResourceNotFoundException;
 
 /**
  * ResourceSearchable Interface
@@ -31,7 +31,7 @@ interface ResourceSearchableInterface extends ResourceInterface
      *
      * @return ResourceInterface
      *
-     * @throws NotFoundHttpException
+     * @throws ResourceNotFoundException
      */
     public function findResource(array $parameters);
 

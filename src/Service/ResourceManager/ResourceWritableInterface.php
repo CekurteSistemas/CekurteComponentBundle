@@ -11,6 +11,8 @@
 
 namespace Cekurte\ComponentBundle\Service\ResourceManager;
 
+use Cekurte\ComponentBundle\Exception\ResourceManagerRefusedWriteException;
+
 /**
  * ResourceWritable Interface
  *
@@ -29,7 +31,7 @@ interface ResourceWritableInterface extends ResourceInterface
      *
      * @return bool
      *
-     * @throws \Exception
+     * @throws ResourceManagerRefusedWriteException
      */
     public function writeResource(ResourceInterface $resource);
 }

@@ -11,6 +11,8 @@
 
 namespace Cekurte\ComponentBundle\Service\ResourceManager;
 
+use Cekurte\ComponentBundle\Exception\ResourceManagerRefusedGetLogException;
+
 /**
  * ResourceLoggable Interface
  *
@@ -28,6 +30,8 @@ interface ResourceLoggableInterface extends ResourceInterface
      * @param  ResourceInterface $resource
      *
      * @return array
+     *
+     * @throws ResourceManagerRefusedGetLogException
      */
     public function getLogEntries(ResourceInterface $resource);
 }
