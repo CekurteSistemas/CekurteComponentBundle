@@ -11,8 +11,6 @@
 
 namespace Cekurte\ComponentBundle\DependencyInjection\ContainerAware;
 
-use Doctrine\ORM\EntityManagerInterface;
-
 /**
  * Doctrine ContainerAware Trait
  *
