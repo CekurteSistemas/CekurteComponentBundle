@@ -89,6 +89,26 @@ class CekurteComponentExtensionTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testLoadParameterEventListenerResponseClass()
+    {
+        $this->assertTrue(class_exists('\\Cekurte\\ComponentBundle\\EventListener\\ResponseListener'));
+
+        $this->assertParameter(
+            'Cekurte\\ComponentBundle\\EventListener\\ResponseListener',
+            'cekurte_component.event_listener.response.class'
+        );
+    }
+
+    public function testLoadParameterEventListenerExceptionClass()
+    {
+        $this->assertTrue(class_exists('\\Cekurte\\ComponentBundle\\EventListener\\ExceptionListener'));
+
+        $this->assertParameter(
+            'Cekurte\\ComponentBundle\\EventListener\\ExceptionListener',
+            'cekurte_component.event_listener.exception.class'
+        );
+    }
+
     public function testLoadHasDefinitionTwigExtensionRouteInfoClass()
     {
         $this->assertHasDefinition(
@@ -100,6 +120,20 @@ class CekurteComponentExtensionTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertHasDefinition(
             'cekurte_component.twig.extension.security_role'
+        );
+    }
+
+    public function testLoadHasDefinitionEventListenerResponseClass()
+    {
+        $this->assertHasDefinition(
+            'cekurte_component.event_listener.response'
+        );
+    }
+
+    public function testLoadHasDefinitionEventListenerExceptionClass()
+    {
+        $this->assertHasDefinition(
+            'cekurte_component.event_listener.exception'
         );
     }
 
@@ -137,5 +171,28 @@ class CekurteComponentExtensionTest extends \PHPUnit_Framework_TestCase
         $reference = $methodCalls[0][1][0];
 
         $this->assertEquals('service_container', (string) $reference);
+    }
+
+    public function testLoadDefinitionEventListenerResponseClass()
+    {
+        $definition = $this->configuration->getDefinition('cekurte_component.event_listener.response');
+
+        $this->assertEquals('%cekurte_component.event_listener.response.class%', $definition->getClass());
+
+        $this->assertTrue($definition->hasTag('kernel.event_subscriber'));
+
+        /** @var Reference $reference */
+        $reference = $definition->getArgument(0);
+
+        $this->assertEquals('jms_serializer', (string) $reference);
+    }
+
+    public function testLoadDefinitionEventListenerExceptionClass()
+    {
+        $definition = $this->configuration->getDefinition('cekurte_component.event_listener.exception');
+
+        $this->assertEquals('%cekurte_component.event_listener.exception.class%', $definition->getClass());
+
+        $this->assertTrue($definition->hasTag('kernel.event_subscriber'));
     }
 }
