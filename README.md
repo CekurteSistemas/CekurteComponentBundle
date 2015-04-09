@@ -1,6 +1,7 @@
 # Cekurte\ComponentBundle
 
 [![Build Status](https://img.shields.io/travis/jpcercal/CekurteComponentBundle/master.svg?style=flat-square)](http://travis-ci.org/jpcercal/CekurteComponentBundle)
+[![Coverage Status](https://coveralls.io/repos/jpcercal/CekurteComponentBundle/badge.svg)](https://coveralls.io/r/jpcercal/CekurteComponentBundle)
 [![Latest Stable Version](https://img.shields.io/packagist/v/cekurte/componentbundle.svg?style=flat-square)](https://packagist.org/packages/cekurte/componentbundle)
 [![Total Downloads](https://img.shields.io/packagist/dt/cekurte/componentbundle.svg?style=flat-square)](https://packagist.org/packages/cekurte/componentbundle)
 [![License](https://img.shields.io/packagist/l/cekurte/componentbundle.svg?style=flat-square)](https://packagist.org/packages/cekurte/componentbundle)
