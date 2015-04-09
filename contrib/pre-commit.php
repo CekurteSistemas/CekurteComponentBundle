@@ -86,7 +86,5 @@ if ($return !== 0) {
 }
 
 if ($exit === 1) {
-    printf("ABORTING COMMIT!\n");
+    throw new \Exception('One or more errors has occurred ABORTING COMMIT!');
 }
-
-exit($exit);
