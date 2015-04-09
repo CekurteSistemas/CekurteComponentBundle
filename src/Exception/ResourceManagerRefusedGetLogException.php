@@ -12,12 +12,12 @@
 namespace Cekurte\ComponentBundle\Exception;
 
 /**
- * ResourceManagerRefusedLogException
+ * ResourceManagerRefusedGetLogException
  *
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
  * @version 2.0
  */
-class ResourceManagerRefusedLogException extends ResourceManagerRefusedException
+class ResourceManagerRefusedGetLogException extends ResourceManagerRefusedException
 {
 }

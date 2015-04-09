@@ -11,23 +11,23 @@
 
 namespace Cekurte\ComponentBundle\Tests\Exception;
 
-use Cekurte\ComponentBundle\Exception\ResourceManagerRefusedLogException;
+use Cekurte\ComponentBundle\Exception\ResourceManagerRefusedGetLogException;
 
 /**
- * Class ResourceManagerRefusedLogExceptionTest
+ * Class ResourceManagerRefusedGetLogExceptionTest
  *
  * @author João Paulo Cercal <jpcercal@gmail.com>
  *
  * @version 2.0
  */
-class ResourceManagerRefusedLogExceptionTest extends \PHPUnit_Framework_TestCase
+class ResourceManagerRefusedGetLogExceptionTest extends \PHPUnit_Framework_TestCase
 {
     public function testInheritedOfResourceException()
     {
         $exception = new ResourceManagerRefusedLogException();
 
         $this->assertInstanceOf(
-            '\\Cekurte\\ComponentBundle\\Exception\\ResourceManagerRefusedException',
+            '\\Cekurte\\ComponentBundle\\Exception\\ResourceManagerRefusedGetLogException',
             $exception
         );
     }
