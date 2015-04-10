@@ -14,10 +14,8 @@
     ],
     "require": {
         "php": ">=5.4",
-        "doctrine/orm": "~2.4",
-        "gedmo/doctrine-extensions": "~2.4",
+        "cekurte/doctrinebundle": "~1.0",
         "jms/serializer-bundle": "~0.13",
-        "symfony/framework-bundle": "~2.3",
         "twig/twig": "~1.3"
     },
     "require-dev": {
